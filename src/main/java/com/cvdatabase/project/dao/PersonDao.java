@@ -2,9 +2,9 @@ package com.cvdatabase.project.dao;
 
 import com.cvdatabase.project.api.dao.IPersonDao;
 import com.cvdatabase.project.entities.Person;
-import com.cvdatabase.project.entities.Person_;
+import com.cvdatabase.project.entities.metamodels.Person_;
 import com.cvdatabase.project.entities.Technology;
-import com.cvdatabase.project.entities.Technology_;
+import com.cvdatabase.project.entities.metamodels.Technology_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;

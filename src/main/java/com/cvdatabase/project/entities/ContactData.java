@@ -1,6 +1,7 @@
 package com.cvdatabase.project.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "contact_data_table")
@@ -12,6 +13,7 @@ public class ContactData extends AEntity {
     @Column(name = "landline_phone_number")
     private String landLinePhone;
 
+    @Email
     @Column(name = "email")
     private String email;
 

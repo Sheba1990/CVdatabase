@@ -31,7 +31,7 @@ public abstract class AGenericDao<T extends AEntity> implements IAGenericDao<T> 
         return entity;
     }
 
-    public T get(Integer id) {
+    public T get(Long id) {
         return entityManager.find(getGenericClass(), id);
     }
 

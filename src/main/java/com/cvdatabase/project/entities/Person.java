@@ -1,6 +1,6 @@
 package com.cvdatabase.project.entities;
 
-import com.cvdatabase.project.utils.StringToDataSQLConverter;
+import com.cvdatabase.project.utils.StringToDateSQLConverter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,21 +18,24 @@ public class Person extends AEntity {
     @Column(name = "middle_name")
     private String middleName;
 
-    @Column(name = "sex")
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
 
     @Column(name = "birthdate")
-    @Convert(converter = StringToDataSQLConverter.class)
+    @Convert(converter = StringToDateSQLConverter.class)
     private String birthDate;
 
     @OneToOne(mappedBy = "person")
     private ContactData contactData;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private CV cv;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "person_technologies_table",
             joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))
@@ -41,11 +44,11 @@ public class Person extends AEntity {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String middleName, String sex, String birthDate) {
+    public Person(String firstName, String lastName, String middleName, Gender gender, String birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
-        this.sex = sex;
+        this.gender = gender;
         this.birthDate = birthDate;
     }
 
@@ -73,12 +76,12 @@ public class Person extends AEntity {
         this.middleName = middleName;
     }
 
-    public String getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getBirthDate() {

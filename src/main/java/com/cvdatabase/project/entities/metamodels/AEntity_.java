@@ -1,4 +1,6 @@
-package com.cvdatabase.project.entities;
+package com.cvdatabase.project.entities.metamodels;
+
+import com.cvdatabase.project.entities.AEntity;
 
 import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SingularAttribute;

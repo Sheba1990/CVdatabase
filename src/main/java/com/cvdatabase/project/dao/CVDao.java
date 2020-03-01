@@ -2,6 +2,9 @@ package com.cvdatabase.project.dao;
 
 import com.cvdatabase.project.api.dao.ICVDao;
 import com.cvdatabase.project.entities.*;
+import com.cvdatabase.project.entities.metamodels.CV_;
+import com.cvdatabase.project.entities.metamodels.Person_;
+import com.cvdatabase.project.entities.metamodels.Technology_;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;

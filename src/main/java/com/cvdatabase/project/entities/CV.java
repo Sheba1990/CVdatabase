@@ -1,15 +1,15 @@
 package com.cvdatabase.project.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "cv_table")
 public class CV extends AEntity {
 
-    @OneToOne(mappedBy = "cv")
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "cv")
     private Person person;
 
     private ContactData contactData;

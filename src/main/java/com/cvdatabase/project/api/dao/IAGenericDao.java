@@ -10,7 +10,7 @@ public interface IAGenericDao<T extends AEntity> {
 
     T create(T entity);
 
-    T get(Integer id);
+    T get(Long id);
 
     void update(T entity);
 

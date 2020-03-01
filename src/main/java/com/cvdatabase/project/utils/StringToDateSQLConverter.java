@@ -5,7 +5,7 @@ import javax.persistence.Converter;
 import java.sql.Date;
 
 @Converter(autoApply = false)
-public class StringToDataSQLConverter implements AttributeConverter<String, Date> {
+public class StringToDateSQLConverter implements AttributeConverter<String, Date> {
 
     public java.sql.Date convertToDatabaseColumn(String entityValue) {
         if(entityValue == null)

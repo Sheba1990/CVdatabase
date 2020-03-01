@@ -1,7 +1,6 @@
 package com.cvdatabase.project.api.dao;
 
 import com.cvdatabase.project.entities.CV;
-import com.cvdatabase.project.entities.Person;
 
 import java.util.List;
 
