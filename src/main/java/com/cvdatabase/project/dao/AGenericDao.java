@@ -1,0 +1,56 @@
+package com.cvdatabase.project.dao;
+
+import com.cvdatabase.project.api.dao.IAGenericDao;
+import com.cvdatabase.project.entities.AEntity;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+
+public abstract class AGenericDao<T extends AEntity> implements IAGenericDao<T> {
+
+    private Class<T> clazz;
+
+    public AGenericDao(Class<T> clazz) {
+        this.clazz = clazz;
+    }
+
+    public Class<T> getGenericClass(){
+        return this.clazz;
+    }
+
+    @PersistenceContext
+    protected EntityManager entityManager;
+
+    public T create(T entity) {
+        entityManager.persist(entity);
+        return entity;
+    }
+
+    public T get(Integer id) {
+        return entityManager.find(getGenericClass(), id);
+    }
+
+    public void update(T entity) {
+        entityManager.merge(entity);
+        entityManager.flush();
+    }
+
+    public void delete(T entity) {
+        entityManager.remove(entity);
+    }
+
+    public List<T> getAll() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> query = criteriaBuilder.createQuery(getGenericClass());
+        Root<T> root = query.from(getGenericClass());
+        query.select(root);
+        TypedQuery<T> result = entityManager.createQuery(query);
+        return result.getResultList();
+    }
+
+}
