@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ICVDao extends IAGenericDao<CV> {
 
-    List<CV> getByTechnologyName(String name);
+    List<CV> getCVByTechnologyName(String name);
 
-    List<CV> getByFirstName(String firstName);
+    List<CV> getCVByPersonFirstName(String firstName);
 
-    List<CV> getByLastName(String lastName);
+    List<CV> getCVByPersonLastName(String lastName);
 
 }

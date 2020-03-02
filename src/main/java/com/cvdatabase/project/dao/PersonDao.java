@@ -9,10 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -53,7 +50,10 @@ public class PersonDao extends AGenericDao<Person> implements IPersonDao {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Person> query = criteriaBuilder.createQuery(Person.class);
             Root<Person> root = query.from(Person.class);
-            query.select(root).where(criteriaBuilder.equal(root.get(Person_.FIRST_NAME), firstName), criteriaBuilder.equal(root.get(Person_.LAST_NAME), lastName));
+            Predicate predicateForFirstName = criteriaBuilder.equal(root.get(Person_.FIRST_NAME), firstName);
+            Predicate predicateForLastName = criteriaBuilder.equal(root.get(Person_.LAST_NAME), lastName);
+            Predicate predicateForFullName = criteriaBuilder.and(predicateForFirstName, predicateForLastName);
+            query.select(root).where(predicateForFullName);
             TypedQuery<Person> result = entityManager.createQuery(query);
             return result.getResultList();
         } catch (NoResultException e) {

@@ -10,7 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(AEntity.class)
 public abstract class AEntity_ {
 
-    public static volatile SingularAttribute<AEntity, Integer> id;
+    public static volatile SingularAttribute<AEntity, Long> id;
 
     public static final String ID = "id";
 

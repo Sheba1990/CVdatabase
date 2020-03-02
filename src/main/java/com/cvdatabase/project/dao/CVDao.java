@@ -1,10 +1,13 @@
 package com.cvdatabase.project.dao;
 
 import com.cvdatabase.project.api.dao.ICVDao;
-import com.cvdatabase.project.entities.*;
+import com.cvdatabase.project.entities.CV;
+import com.cvdatabase.project.entities.Person;
+import com.cvdatabase.project.entities.Technology;
 import com.cvdatabase.project.entities.metamodels.CV_;
 import com.cvdatabase.project.entities.metamodels.Person_;
 import com.cvdatabase.project.entities.metamodels.Technology_;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -14,6 +17,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+@Repository
 public class CVDao extends AGenericDao<CV> implements ICVDao {
 
     public CVDao() {
@@ -21,7 +25,7 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
     }
 
 
-    public List<CV> getByTechnologyName(String name) {
+    public List<CV> getCVByTechnologyName(String name) {
         try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
@@ -36,7 +40,7 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
         }
     }
 
-    public List<CV> getByFirstName(String firstName) {
+    public List<CV> getCVByPersonFirstName(String firstName) {
         try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
@@ -51,7 +55,7 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
         }
     }
 
-    public List<CV> getByLastName(String lastName) {
+    public List<CV> getCVByPersonLastName(String lastName) {
         try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
