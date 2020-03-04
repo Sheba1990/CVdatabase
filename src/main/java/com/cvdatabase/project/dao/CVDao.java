@@ -3,7 +3,6 @@ package com.cvdatabase.project.dao;
 import com.cvdatabase.project.api.dao.ICVDao;
 import com.cvdatabase.project.entities.CV;
 import com.cvdatabase.project.entities.Person;
-import com.cvdatabase.project.entities.Technology;
 import com.cvdatabase.project.entities.metamodels.CV_;
 import com.cvdatabase.project.entities.metamodels.Person_;
 import com.cvdatabase.project.entities.metamodels.Technology_;

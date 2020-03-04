@@ -1,6 +1,5 @@
-package com.cvdatabase.project.api.dto;
+package com.cvdatabase.project.dto;
 
-import com.cvdatabase.project.entities.ContactData;
 import com.cvdatabase.project.entities.Gender;
 import com.cvdatabase.project.entities.Person;
 import com.cvdatabase.project.entities.Technology;

@@ -1,4 +1,4 @@
-package com.cvdatabase.project.api.dto;
+package com.cvdatabase.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

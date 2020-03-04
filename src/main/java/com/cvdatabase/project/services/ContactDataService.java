@@ -2,10 +2,9 @@ package com.cvdatabase.project.services;
 
 import com.cvdatabase.project.api.dao.IContactDataDao;
 import com.cvdatabase.project.api.dao.IPersonDao;
-import com.cvdatabase.project.api.dto.ContactDataDto;
+import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.api.services.IContactDataService;
 import com.cvdatabase.project.entities.ContactData;
-import com.cvdatabase.project.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

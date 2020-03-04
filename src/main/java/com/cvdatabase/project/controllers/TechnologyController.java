@@ -1,6 +1,6 @@
 package com.cvdatabase.project.controllers;
 
-import com.cvdatabase.project.api.dto.TechnologyDto;
+import com.cvdatabase.project.dto.TechnologyDto;
 import com.cvdatabase.project.api.services.ITechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -1,6 +1,6 @@
 package com.cvdatabase.project.api.services;
 
-import com.cvdatabase.project.api.dto.TechnologyDto;
+import com.cvdatabase.project.dto.TechnologyDto;
 
 import java.util.List;
 

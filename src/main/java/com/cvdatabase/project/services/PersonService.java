@@ -3,7 +3,7 @@ package com.cvdatabase.project.services;
 import com.cvdatabase.project.api.dao.IContactDataDao;
 import com.cvdatabase.project.api.dao.IPersonDao;
 import com.cvdatabase.project.api.dao.ITechnologyDao;
-import com.cvdatabase.project.api.dto.PersonDto;
+import com.cvdatabase.project.dto.PersonDto;
 import com.cvdatabase.project.api.services.IPersonService;
 import com.cvdatabase.project.entities.ContactData;
 import com.cvdatabase.project.entities.Person;

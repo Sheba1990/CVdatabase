@@ -1,7 +1,7 @@
 package com.cvdatabase.project.services;
 
 import com.cvdatabase.project.api.dao.ITechnologyDao;
-import com.cvdatabase.project.api.dto.TechnologyDto;
+import com.cvdatabase.project.dto.TechnologyDto;
 import com.cvdatabase.project.api.services.ITechnologyService;
 import com.cvdatabase.project.entities.Technology;
 import org.springframework.beans.factory.annotation.Autowired;

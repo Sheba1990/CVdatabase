@@ -1,6 +1,6 @@
 package com.cvdatabase.project.controllers;
 
-import com.cvdatabase.project.api.dto.ContactDataDto;
+import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.api.services.IContactDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
