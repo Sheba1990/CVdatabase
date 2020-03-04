@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ITechnologyService {
 
-    public List<TechnologyDto> getAllTechnologies();
-
     TechnologyDto addTechnology(TechnologyDto technologyDto);
+
+    public List<TechnologyDto> getAllTechnologies();
 
     TechnologyDto getTechnologyById(long id);
 

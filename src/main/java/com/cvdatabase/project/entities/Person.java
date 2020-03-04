@@ -19,23 +19,24 @@ public class Person extends AEntity {
     private String middleName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @Column(name = "birthdate")
     @Convert(converter = StringToDateSQLConverter.class)
     private String birthDate;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_data_id", referencedColumnName = "id")
     private ContactData contactData;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "cv_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "person")
     private CV cv;
 
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = {CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.DETACH})
     @JoinTable(name = "person_technologies_table",
             joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "technology_id", referencedColumnName = "id"))

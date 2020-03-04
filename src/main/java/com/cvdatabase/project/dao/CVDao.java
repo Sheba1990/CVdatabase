@@ -11,10 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -30,10 +27,10 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
             Root<CV> root = query.from(CV.class);
-            Join<CV, Technology> technology = root.join(CV_.TECHNOLOGIES);
-            query.select(root).where(criteriaBuilder.equal(technology.get(Technology_.NAME), name));
+            Join<CV, Person> join = root.join(Person_.TECHNOLOGIES);
+            Predicate predicateForTechnologyName = criteriaBuilder.equal(join.get(Technology_.NAME), name);
+            query.select(root).where(predicateForTechnologyName);
             TypedQuery<CV> result = entityManager.createQuery(query);
-            System.out.println("The list of CVs with mentioned technology: " + name);
             return result.getResultList();
         } catch (NoResultException e) {
             return null;
@@ -45,10 +42,9 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
             Root<CV> root = query.from(CV.class);
-            Join<CV, Person> person = root.join(CV_.PERSON);
-            query.select(root).where(criteriaBuilder.equal(person.get(Person_.FIRST_NAME), firstName));
+            Join<CV, Person> personJoin = root.join(CV_.PERSON);
+            query.select(root).where(criteriaBuilder.equal(personJoin.get(Person_.FIRST_NAME), firstName));
             TypedQuery<CV> result = entityManager.createQuery(query);
-            System.out.println("The list of CVs with mentioned first name : " + firstName);
             return result.getResultList();
         } catch (NoResultException e) {
             return null;
@@ -60,10 +56,26 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
             Root<CV> root = query.from(CV.class);
-            Join<CV, Person> person = root.join(CV_.PERSON);
-            query.select(root).where(criteriaBuilder.equal(person.get(Person_.LAST_NAME), lastName));
+            Join<CV, Person> personJoin = root.join(CV_.PERSON);
+            query.select(root).where(criteriaBuilder.equal(personJoin.get(Person_.LAST_NAME), lastName));
             TypedQuery<CV> result = entityManager.createQuery(query);
-            System.out.println("The list of CVs with mentioned last name : " + lastName);
+            return result.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<CV> getCVByPersonFullName(String firstName, String lastName) {
+        try {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
+            Root<CV> root = query.from(CV.class);
+            Join<CV, Person> personJoin = root.join(CV_.PERSON);
+            Predicate predicateForFirstName = criteriaBuilder.equal(root.get(Person_.FIRST_NAME), firstName);
+            Predicate predicateForLastName = criteriaBuilder.equal(root.get(Person_.LAST_NAME), lastName);
+            Predicate predicateForFullName = criteriaBuilder.and(predicateForFirstName, predicateForLastName);
+            query.select(root).where(predicateForFullName);
+            TypedQuery<CV> result = entityManager.createQuery(query);
             return result.getResultList();
         } catch (NoResultException e) {
             return null;

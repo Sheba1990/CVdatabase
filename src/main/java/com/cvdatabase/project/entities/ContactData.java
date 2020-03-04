@@ -29,8 +29,7 @@ public class ContactData extends AEntity {
     @Column(name = "personal_site")
     private String personalSite;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "contactData")
     private Person person;
 
     public ContactData() {

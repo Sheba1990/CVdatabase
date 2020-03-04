@@ -1,7 +1,6 @@
 package com.cvdatabase.project.api.services;
 
 import com.cvdatabase.project.api.dto.ContactDataDto;
-import com.cvdatabase.project.entities.ContactData;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public interface IContactDataService {
 
     public List<ContactDataDto> getAllContactData();
 
-    ContactDataDto addContactData(ContactData contactData);
+    ContactDataDto addContactData(ContactDataDto contactDataDto);
 
     ContactDataDto getContactDataById(long id);
 

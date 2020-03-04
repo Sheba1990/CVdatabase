@@ -73,7 +73,7 @@ public class CVDto extends ADto {
             cvDto.setGender(cv.getPerson().getGender());
             cvDto.setBirthDate(cv.getPerson().getBirthDate());
         }
-        if (cv.getContactData() != null) {
+        if (cv.getPerson().getContactData() != null) {
             cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
             cvDto.setLandLinePhone(cv.getPerson().getContactData().getLandLinePhone());
             cvDto.setEmail(cv.getPerson().getContactData().getEmail());
@@ -82,7 +82,7 @@ public class CVDto extends ADto {
             cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
             cvDto.setPersonalSite(cv.getPerson().getContactData().getPersonalSite());
         }
-        if (cv.getTechnologies() != null) {
+        if (cv.getPerson().getTechnologies() != null) {
             cvDto.setTechnologies(cv.getPerson().getTechnologies());
         }
         return cvDto;

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IPersonService {
 
-    public List<PersonDto> getAllPersons();
-
     PersonDto addPerson(PersonDto personDto);
+
+    public List<PersonDto> getAllPersons();
 
     PersonDto getPersonById(long id);
 
@@ -16,9 +16,9 @@ public interface IPersonService {
 
     public List<PersonDto> getByLastName(String lastName);
 
-    public List<PersonDto> getByTechnologyName(String name);
-
     public List<PersonDto> getByFullName(String firstName, String lastName);
+
+    public List<PersonDto> getByTechnologyName(String name);
 
     void updatePerson(long id, PersonDto personDto);
 
