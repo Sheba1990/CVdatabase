@@ -41,8 +41,14 @@ public class PersonDto extends ADto {
             personDto.setMiddleName(person.getMiddleName());
             personDto.setGender(person.getGender());
             personDto.setBirthDate(person.getBirthDate());
-            personDto.setMobilePhone(person.getContactData().getMobilePhone());
-            personDto.setEmail(person.getContactData().getEmail());
+            if (person.getContactData() != null) {
+                personDto.setMobilePhone(person.getContactData().getMobilePhone());
+                personDto.setEmail(person.getContactData().getEmail());
+            } else {
+                personDto.setMobilePhone(null);
+                personDto.setEmail(null);
+            }
+
             for (Technology technology : person.getTechnologies()) {
                 TechnologyDto technologyDto = new TechnologyDto();
                 if (person.getTechnologies() != null) {
@@ -67,8 +73,13 @@ public class PersonDto extends ADto {
         personDto.setMiddleName(person.getMiddleName());
         personDto.setGender(person.getGender());
         personDto.setBirthDate(person.getBirthDate());
-        personDto.setMobilePhone(person.getContactData().getMobilePhone());
-        personDto.setEmail(person.getContactData().getEmail());
+        if (person.getContactData() != null) {
+            personDto.setMobilePhone(person.getContactData().getMobilePhone());
+            personDto.setEmail(person.getContactData().getEmail());
+        } else {
+            personDto.setMobilePhone(null);
+            personDto.setEmail(null);
+        }
         for (Technology technology : person.getTechnologies()) {
             TechnologyDto technologyDto = new TechnologyDto();
             if (person.getTechnologies() != null) {
