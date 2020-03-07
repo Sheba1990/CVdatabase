@@ -12,6 +12,8 @@ public interface ITechnologyService {
 
     TechnologyDto getTechnologyById(long id);
 
+    TechnologyDto getTechnologyByName(String name);
+
     void updateTechnology(long id, TechnologyDto technologyDto);
 
     void deleteTechnology(long id);

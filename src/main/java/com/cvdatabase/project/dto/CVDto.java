@@ -2,7 +2,6 @@ package com.cvdatabase.project.dto;
 
 import com.cvdatabase.project.entities.CV;
 import com.cvdatabase.project.entities.Gender;
-import com.cvdatabase.project.entities.Technology;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class CVDto extends ADto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String personalSite;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Technology> technologies;
+    private List<TechnologyDto> technologies;
 
     public CVDto() {
     }
@@ -45,19 +44,25 @@ public class CVDto extends ADto {
         for (CV cv : cvList) {
             CVDto cvDto = new CVDto();
             cvDto.setId(cv.getId());
-            cvDto.setFirstName(cv.getPerson().getFirstName());
-            cvDto.setLastName(cv.getPerson().getLastName());
-            cvDto.setMiddleName(cv.getPerson().getMiddleName());
-            cvDto.setGender(cv.getPerson().getGender());
-            cvDto.setBirthDate(cv.getPerson().getBirthDate());
-            cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
-            cvDto.setLandLinePhone(cv.getPerson().getContactData().getLandLinePhone());
-            cvDto.setEmail(cv.getPerson().getContactData().getEmail());
-            cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
-            cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
-            cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
-            cvDto.setPersonalSite(cv.getPerson().getContactData().getPersonalSite());
-            cvDto.setTechnologies(cv.getPerson().getTechnologies());
+            if (cv.getPerson() != null) {
+                cvDto.setFirstName(cv.getPerson().getFirstName());
+                cvDto.setLastName(cv.getPerson().getLastName());
+                cvDto.setMiddleName(cv.getPerson().getMiddleName());
+                cvDto.setGender(cv.getPerson().getGender());
+                cvDto.setBirthDate(cv.getPerson().getBirthDate());
+            }
+            if (cv.getPerson().getContactData() != null) {
+                cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
+                cvDto.setLandLinePhone(cv.getPerson().getContactData().getLandLinePhone());
+                cvDto.setEmail(cv.getPerson().getContactData().getEmail());
+                cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
+                cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
+                cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
+                cvDto.setPersonalSite(cv.getPerson().getContactData().getPersonalSite());
+            }
+            if (cv.getPerson().getTechnologies() != null) {
+                cvDto.setTechnologies(TechnologyDto.convertList(cv.getPerson().getTechnologies()));
+            }
             cvs.add(cvDto);
         }
         return cvs;
@@ -83,7 +88,7 @@ public class CVDto extends ADto {
             cvDto.setPersonalSite(cv.getPerson().getContactData().getPersonalSite());
         }
         if (cv.getPerson().getTechnologies() != null) {
-            cvDto.setTechnologies(cv.getPerson().getTechnologies());
+            cvDto.setTechnologies(TechnologyDto.convertList(cv.getPerson().getTechnologies()));
         }
         return cvDto;
     }
@@ -102,7 +107,7 @@ public class CVDto extends ADto {
         this.linkedIn = cv.getPerson().getContactData().getLinkedIn();
         this.jobsTutBy = cv.getPerson().getContactData().getJobsTutBy();
         this.personalSite = cv.getPerson().getContactData().getPersonalSite();
-        this.technologies = cv.getPerson().getTechnologies();
+        this.technologies = TechnologyDto.convertList(cv.getPerson().getTechnologies());
     }
 
     public String getFirstName() {
@@ -201,11 +206,11 @@ public class CVDto extends ADto {
         this.personalSite = personalSite;
     }
 
-    public List<Technology> getTechnologies() {
+    public List<TechnologyDto> getTechnologies() {
         return technologies;
     }
 
-    public void setTechnologies(List<Technology> technologies) {
+    public void setTechnologies(List<TechnologyDto> technologies) {
         this.technologies = technologies;
     }
 }

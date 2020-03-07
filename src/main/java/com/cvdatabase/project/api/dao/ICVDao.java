@@ -12,4 +12,6 @@ public interface ICVDao extends IAGenericDao<CV> {
 
     List<CV> getCVByPersonLastName(String lastName);
 
+    List<CV> getCVByPersonFullName(String firstName, String lastName);
+
 }

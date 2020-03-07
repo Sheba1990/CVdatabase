@@ -27,6 +27,9 @@ public class ContactDataDto extends ADto {
     private String jobsTutBy;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String devBy;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String personalSite;
 
     private String personFirstName;
@@ -44,6 +47,7 @@ public class ContactDataDto extends ADto {
             contactDataDto.setGitHub(contactData.getGitHub());
             contactDataDto.setLinkedIn(contactData.getLinkedIn());
             contactDataDto.setJobsTutBy(contactData.getJobsTutBy());
+            contactDataDto.setDevBy(contactData.getDevBy());
             contactDataDto.setPersonalSite(contactData.getPersonalSite());
             if (contactData.getPerson() != null) {
                 contactDataDto.setPersonFirstName(contactData.getPerson().getFirstName());
@@ -65,6 +69,7 @@ public class ContactDataDto extends ADto {
         contactDataDto.setGitHub(contactData.getGitHub());
         contactDataDto.setLinkedIn(contactData.getLinkedIn());
         contactDataDto.setJobsTutBy(contactData.getJobsTutBy());
+        contactDataDto.setDevBy(contactData.getDevBy());
         contactDataDto.setPersonalSite(contactData.getPersonalSite());
         if (contactData.getPerson() != null) {
             contactDataDto.setPersonFirstName(contactData.getPerson().getFirstName());
@@ -85,6 +90,7 @@ public class ContactDataDto extends ADto {
         this.email = contactData.getEmail();
         this.gitHub = contactData.getGitHub();
         this.jobsTutBy = contactData.getJobsTutBy();
+        this.devBy = contactData.getDevBy();
         this.linkedIn = contactData.getLinkedIn();
         this.personalSite = contactData.getPersonalSite();
         this.personFirstName = contactData.getPerson().getFirstName();
@@ -161,5 +167,13 @@ public class ContactDataDto extends ADto {
 
     public void setPersonLastName(String personLastName) {
         this.personLastName = personLastName;
+    }
+
+    public String getDevBy() {
+        return devBy;
+    }
+
+    public void setDevBy(String devBy) {
+        this.devBy = devBy;
     }
 }

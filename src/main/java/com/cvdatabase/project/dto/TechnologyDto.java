@@ -18,23 +18,8 @@ public class TechnologyDto extends ADto {
     public static List<TechnologyDto> convertList(List<Technology> technologyList) {
         List<TechnologyDto> technologies = new ArrayList();
         for (Technology technology : technologyList) {
-            List<PersonDto> persons = new ArrayList();
             TechnologyDto technologyDto = new TechnologyDto();
-            technologyDto.setId(technology.getId());
             technologyDto.setName(technology.getName());
-            for (Person person : technology.getPersons()) {
-                PersonDto personDto = new PersonDto();
-                if (technology.getPersons() != null) {
-                    personDto.setFirstName(person.getFirstName());
-                    personDto.setLastName(person.getLastName());
-                    personDto.setMobilePhone(person.getContactData().getMobilePhone());
-                    personDto.setEmail(person.getContactData().getEmail());
-                    persons.add(personDto);
-                } else {
-                    technology.setPersons(null);
-                }
-            }
-            technologyDto.setPersons(persons);
             technologies.add(technologyDto);
         }
         return technologies;
@@ -48,7 +33,6 @@ public class TechnologyDto extends ADto {
         for (Person person : technology.getPersons()) {
             PersonDto personDto = new PersonDto();
             if (technology.getPersons() != null) {
-                personDto.setId(person.getId());
                 personDto.setFirstName(person.getFirstName());
                 personDto.setLastName(person.getLastName());
                 personDto.setMobilePhone(person.getContactData().getMobilePhone());

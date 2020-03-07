@@ -14,9 +14,11 @@ public interface ICVService {
 
     public List<CVDto> getByTechnologyName(String name);
 
-    public List<CVDto> getByPersonFirstName(String firstName);
+    public List<CVDto> getCVByPersonFirstName(String firstName);
 
-    public List<CVDto> getByPersonLastName(String lastName);
+    public List<CVDto> getCVByPersonLastName(String lastName);
+
+    public List<CVDto> getCVByPersonFullName(String firstName, String lastName);
 
     void updateCV(long id, CVDto cvDto);
 

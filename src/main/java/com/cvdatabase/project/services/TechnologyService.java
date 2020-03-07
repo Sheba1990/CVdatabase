@@ -32,6 +32,10 @@ public class TechnologyService implements ITechnologyService {
         return TechnologyDto.entityToDto(technologyDao.get(id));
     }
 
+    public TechnologyDto getTechnologyByName(String name) {
+        return TechnologyDto.entityToDto(technologyDao.getByName(name));
+    }
+
     public void updateTechnology(long id, TechnologyDto technologyDto) {
         Technology technology = technologyDao.get(id);
         if (technologyDto.getName() != null && !StringUtils.isEmpty(technologyDto.getName())) {

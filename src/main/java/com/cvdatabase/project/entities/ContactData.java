@@ -1,6 +1,9 @@
 package com.cvdatabase.project.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Entity
@@ -26,6 +29,9 @@ public class ContactData extends AEntity {
     @Column(name = "jobs_tut_by")
     private String jobsTutBy;
 
+    @Column(name = "dev_by")
+    private String devBy;
+
     @Column(name = "personal_site")
     private String personalSite;
 
@@ -35,14 +41,16 @@ public class ContactData extends AEntity {
     public ContactData() {
     }
 
-    public ContactData(String mobilePhone, String landLinePhone, String email, String gitHub, String linkedIn, String jobsTutBy, String personalSite) {
+    public ContactData(String mobilePhone, String landLinePhone, @Email String email, String gitHub, String linkedIn, String jobsTutBy, String devBy, String personalSite, Person person) {
         this.mobilePhone = mobilePhone;
         this.landLinePhone = landLinePhone;
         this.email = email;
         this.gitHub = gitHub;
         this.linkedIn = linkedIn;
         this.jobsTutBy = jobsTutBy;
+        this.devBy = devBy;
         this.personalSite = personalSite;
+        this.person = person;
     }
 
     public String getMobilePhone() {
@@ -107,5 +115,13 @@ public class ContactData extends AEntity {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public String getDevBy() {
+        return devBy;
+    }
+
+    public void setDevBy(String devBy) {
+        this.devBy = devBy;
     }
 }

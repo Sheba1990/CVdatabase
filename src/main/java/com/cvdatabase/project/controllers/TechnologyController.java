@@ -35,6 +35,11 @@ public class TechnologyController {
         return technologyService.getTechnologyById(id);
     }
 
+    @GetMapping(value = "/name/{name}")
+    public TechnologyDto getTechnologyByName(@PathVariable String name) {
+        return technologyService.getTechnologyByName(name);
+    }
+
     //Update
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,

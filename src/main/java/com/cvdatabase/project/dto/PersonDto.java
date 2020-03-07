@@ -2,7 +2,6 @@ package com.cvdatabase.project.dto;
 
 import com.cvdatabase.project.entities.Gender;
 import com.cvdatabase.project.entities.Person;
-import com.cvdatabase.project.entities.Technology;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
@@ -17,8 +16,10 @@ public class PersonDto extends ADto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String middleName;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Gender gender;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String birthDate;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -48,17 +49,6 @@ public class PersonDto extends ADto {
                 personDto.setMobilePhone(null);
                 personDto.setEmail(null);
             }
-
-            for (Technology technology : person.getTechnologies()) {
-                TechnologyDto technologyDto = new TechnologyDto();
-                if (person.getTechnologies() != null) {
-                    technologyDto.setName(technology.getName());
-                    technologies.add(technologyDto);
-                } else {
-                    technologyDto.setName(null);
-                }
-            }
-            personDto.setTechnologies(technologies);
             persons.add(personDto);
         }
         return persons;
@@ -80,16 +70,6 @@ public class PersonDto extends ADto {
             personDto.setMobilePhone(null);
             personDto.setEmail(null);
         }
-        for (Technology technology : person.getTechnologies()) {
-            TechnologyDto technologyDto = new TechnologyDto();
-            if (person.getTechnologies() != null) {
-                technologyDto.setName(technology.getName());
-                technologies.add(technologyDto);
-            } else {
-                technologyDto.setName(null);
-            }
-        }
-        personDto.setTechnologies(technologies);
         return personDto;
     }
 
