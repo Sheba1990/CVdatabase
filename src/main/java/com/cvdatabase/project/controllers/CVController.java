@@ -1,30 +1,54 @@
 package com.cvdatabase.project.controllers;
 
-import com.cvdatabase.project.dto.CVDto;
 import com.cvdatabase.project.api.services.ICVService;
+import com.cvdatabase.project.api.services.IContactDataService;
+import com.cvdatabase.project.api.services.IPersonService;
+import com.cvdatabase.project.api.services.ITechnologyService;
+import com.cvdatabase.project.dto.CVDto;
+import com.cvdatabase.project.dto.ContactDataDto;
+import com.cvdatabase.project.dto.PersonDto;
+import com.cvdatabase.project.dto.TechnologyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/cv")
+@RequestMapping("/cvs")
 public class CVController {
 
     @Autowired(required = true)
     ICVService cvService;
 
+    @Autowired
+    IPersonService personService;
+
+    @Autowired
+    IContactDataService contactDataService;
+
+    @Autowired
+    ITechnologyService technologyService;
+
     @PostMapping(value = "/",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public CVDto addCV(@RequestBody CVDto cvDto) {
+    public CVDto addCV(CVDto cvDto) {
         return cvService.addCV(cvDto);
     }
 
-    @GetMapping()
-    public List<CVDto> getAllCVs() {
-        return cvService.getAllCVs();
+    @GetMapping
+    public ModelAndView getAllCVs() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<CVDto> cvs = cvService.getAllCVs();
+        List<PersonDto> persons = personService.getAllPersons();
+        List<ContactDataDto> contacts = contactDataService.getAllContactData();
+        List<TechnologyDto> technologies = technologyService.getAllTechnologies();
+        modelAndView.setViewName("views/cvs");
+        modelAndView.addObject("cvList", cvs);
+        return modelAndView;
     }
 
     @GetMapping(value = "/{id}")

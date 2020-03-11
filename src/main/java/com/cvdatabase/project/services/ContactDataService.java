@@ -25,12 +25,10 @@ public class ContactDataService implements IContactDataService {
     public ContactDataDto addContactData(ContactDataDto contactDataDto) {
         ContactData contactData = new ContactData();
         contactData.setMobilePhone(contactDataDto.getMobilePhone());
-        contactData.setLandLinePhone(contactDataDto.getLandLinePhone());
         contactData.setEmail(contactDataDto.getEmail());
         contactData.setGitHub(contactDataDto.getGitHub());
         contactData.setLinkedIn(contactDataDto.getLinkedIn());
         contactData.setJobsTutBy(contactDataDto.getJobsTutBy());
-        contactData.setPersonalSite(contactDataDto.getPersonalSite());
         return ContactDataDto.entityToDto(contactDataDao.create(contactData));
     }
 
@@ -47,9 +45,6 @@ public class ContactDataService implements IContactDataService {
         if (contactDataDto.getMobilePhone() != null && !StringUtils.isEmpty(contactDataDto.getMobilePhone())) {
             contactData.setMobilePhone(contactDataDto.getMobilePhone());
         }
-        if (contactDataDto.getLandLinePhone() != null && !StringUtils.isEmpty(contactDataDto.getLandLinePhone())) {
-            contactData.setLandLinePhone(contactDataDto.getLandLinePhone());
-        }
         if (contactDataDto.getEmail() != null && !StringUtils.isEmpty(contactDataDto.getEmail())) {
             contactData.setEmail(contactDataDto.getEmail());
         }
@@ -61,9 +56,6 @@ public class ContactDataService implements IContactDataService {
         }
         if (contactDataDto.getJobsTutBy() != null && !StringUtils.isEmpty(contactDataDto.getJobsTutBy())) {
             contactData.setJobsTutBy(contactDataDto.getJobsTutBy());
-        }
-        if (contactDataDto.getPersonalSite() != null && !StringUtils.isEmpty(contactDataDto.getPersonalSite())) {
-            contactData.setPersonalSite(contactDataDto.getPersonalSite());
         }
         contactDataDao.update(contactData);
     }

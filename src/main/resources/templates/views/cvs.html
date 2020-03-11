@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Резюме менеджер</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="../../../resources/static/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/static/css/core.css}"/>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" class="align-middle">ID</th>
+            <th scope="col" class="align-middle">Имя</th>
+            <th scope="col" class="align-middle">Фамилия</th>
+            <th scope="col">Отчество</th>
+            <th scope="col" class="align-middle">Дата рождения</th>
+            <th scope="col">Пол</th>
+            <th scope="col">Мобильный телефон</th>
+            <th scope="col">Email</th>
+            <th scope="col">GitHub</th>
+            <th scope="col">Linkedin</th>
+            <th scope="col">РАБОТА.TUT.BY</th>
+            <th scope="colgroup">Технологии</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cv : ${cvList}">
+            <td th:text="${cv.id}">ID</td>
+            <td th:text="${cv.firstName}">Имя</td>
+            <td th:text="${cv.lastName}">Фамилия</td>
+            <td th:text="${cv.middleName}">Отчество</td>
+            <td th:text="${cv.birthDate}">Дата рождения</td>
+            <td th:text="${cv.gender}">Пол</td>
+            <td th:text="${cv.mobilePhone}">Мобильный телефон</td>
+            <td th:text="${cv.email}">Email</td>
+            <td th:text="${cv.gitHub}">GitHub</td>
+            <td th:text="${cv.linkedIn}">Linkedin</td>
+            <td th:text="${cv.jobsTutBy}">РАБОТА.TUT.BY</td>
+            <td th:text="${cv.technologies}">Технологии</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

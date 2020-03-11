@@ -15,14 +15,12 @@ public class CVDto extends ADto {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String middleName;
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Gender gender;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String birthDate;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String mobilePhone;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String landLinePhone;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,8 +29,6 @@ public class CVDto extends ADto {
     private String linkedIn;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String jobsTutBy;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String personalSite;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<TechnologyDto> technologies;
 
@@ -53,12 +49,10 @@ public class CVDto extends ADto {
             }
             if (cv.getPerson().getContactData() != null) {
                 cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
-                cvDto.setLandLinePhone(cv.getPerson().getContactData().getLandLinePhone());
                 cvDto.setEmail(cv.getPerson().getContactData().getEmail());
                 cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
                 cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
                 cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
-                cvDto.setPersonalSite(cv.getPerson().getContactData().getPersonalSite());
             }
             if (cv.getPerson().getTechnologies() != null) {
                 cvDto.setTechnologies(TechnologyDto.convertList(cv.getPerson().getTechnologies()));
@@ -80,12 +74,10 @@ public class CVDto extends ADto {
         }
         if (cv.getPerson().getContactData() != null) {
             cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
-            cvDto.setLandLinePhone(cv.getPerson().getContactData().getLandLinePhone());
             cvDto.setEmail(cv.getPerson().getContactData().getEmail());
             cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
             cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
             cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
-            cvDto.setPersonalSite(cv.getPerson().getContactData().getPersonalSite());
         }
         if (cv.getPerson().getTechnologies() != null) {
             cvDto.setTechnologies(TechnologyDto.convertList(cv.getPerson().getTechnologies()));
@@ -101,12 +93,10 @@ public class CVDto extends ADto {
         this.gender = cv.getPerson().getGender();
         this.birthDate = cv.getPerson().getBirthDate();
         this.mobilePhone = cv.getPerson().getContactData().getMobilePhone();
-        this.landLinePhone = cv.getPerson().getContactData().getLandLinePhone();
         this.email = cv.getPerson().getContactData().getEmail();
         this.gitHub = cv.getPerson().getContactData().getGitHub();
         this.linkedIn = cv.getPerson().getContactData().getLinkedIn();
         this.jobsTutBy = cv.getPerson().getContactData().getJobsTutBy();
-        this.personalSite = cv.getPerson().getContactData().getPersonalSite();
         this.technologies = TechnologyDto.convertList(cv.getPerson().getTechnologies());
     }
 
@@ -158,14 +148,6 @@ public class CVDto extends ADto {
         this.mobilePhone = mobilePhone;
     }
 
-    public String getLandLinePhone() {
-        return landLinePhone;
-    }
-
-    public void setLandLinePhone(String landLinePhone) {
-        this.landLinePhone = landLinePhone;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -198,14 +180,6 @@ public class CVDto extends ADto {
         this.jobsTutBy = jobsTutBy;
     }
 
-    public String getPersonalSite() {
-        return personalSite;
-    }
-
-    public void setPersonalSite(String personalSite) {
-        this.personalSite = personalSite;
-    }
-
     public List<TechnologyDto> getTechnologies() {
         return technologies;
     }
@@ -213,4 +187,5 @@ public class CVDto extends ADto {
     public void setTechnologies(List<TechnologyDto> technologies) {
         this.technologies = technologies;
     }
+
 }
