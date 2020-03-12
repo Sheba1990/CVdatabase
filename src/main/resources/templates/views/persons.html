@@ -10,8 +10,8 @@
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div class="form-row"><!-- это блок для строки поиска по сообщениям -->
     <div class="form-group col-md-6">
-        <form method="get" action="/cvs/first_name/{firstName}" class="form-inline">
-            <input type="text" name="firstName" class="form-control" placeholder="По имени">
+        <form method="get" action="/persons/first_name/{firstName}" class="form-inline">
+            <input type="text" name="firstName" class="form-control" placeholder="Найти по имени">
             <button type="submit" class="btn btn-primary ml-2">
                 Найти
             </button>
@@ -20,8 +20,8 @@
 </div>
 <div class="form-row"><!-- это блок для строки поиска по сообщениям -->
     <div class="form-group col-md-6">
-        <form method="get" action="/cvs/last_name/{lastName}" class="form-inline">
-            <input type="text" name="lastName" class="form-control" placeholder="По фамилии">
+        <form method="get" action="/persons/last_name/{lastName}" class="form-inline">
+            <input type="text" name="lastName" class="form-control" placeholder="Найти по фамилии">
             <button type="submit" class="btn btn-primary ml-2">
                 Найти
             </button>
@@ -40,26 +40,18 @@
             <th scope="col" class="align-middle">Пол</th>
             <th scope="col" class="align-middle">Мобильный телефон</th>
             <th scope="col" class="align-middle">Email</th>
-            <th scope="col" class="align-middle">GitHub</th>
-            <th scope="col" class="align-middle">Linkedin</th>
-            <th scope="col" class="align-middle">РАБОТА.TUT.BY</th>
-            <th scope="col" class="align-middle">Технологии</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cv : ${cvsList}">
-            <td th:text="${cv.id}">ID</td>
-            <td th:text="${cv.firstName}">Имя</td>
-            <td th:text="${cv.lastName}">Фамилия</td>
-            <td th:text="${cv.middleName}">Отчество</td>
-            <td th:text="${cv.birthDate}">Дата рождения</td>
-            <td th:text="${cv.gender}">Пол</td>
-            <td th:text="${cv.mobilePhone}">Мобильный телефон</td>
-            <td th:text="${cv.email}">Email</td>
-            <td th:text="${cv.gitHub}">GitHub</td>
-            <td th:text="${cv.linkedIn}">Linkedin</td>
-            <td th:text="${cv.jobsTutBy}">РАБОТА.TUT.BY</td>
-            <td th:text="${cv.technologies}">Технологии</td>
+        <tr th:each="person : ${personsList}">
+            <td th:text="${person.id}">ID</td>
+            <td th:text="${person.firstName}">Имя</td>
+            <td th:text="${person.lastName}">Фамилия</td>
+            <td th:text="${person.middleName}">Отчество</td>
+            <td th:text="${person.birthDate}">Дата рождения</td>
+            <td th:text="${person.gender}">Пол</td>
+            <td th:text="${person.mobilePhone}">Мобильный телефон</td>
+            <td th:text="${person.email}">Email</td>
         </tr>
         </tbody>
     </table>

@@ -13,10 +13,10 @@ public class StringToDateSQLConverter implements AttributeConverter<String, Date
     public java.sql.Date convertToDatabaseColumn(String entityValue) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate localDate = LocalDate.parse(entityValue, formatter).plusDays(1);
-        return Optional.ofNullable(localDate).map(Date::valueOf).orElse(null);
-//        if(localDate == null)
-//            return null;
-//        return java.sql.Date.valueOf(localDate);
+//        return Optional.ofNullable(localDate).map(Date::valueOf).orElse(null);
+        if(localDate == null)
+            return null;
+        return java.sql.Date.valueOf(localDate);
     }
 
     public String convertToEntityAttribute(java.sql.Date databaseValue) {

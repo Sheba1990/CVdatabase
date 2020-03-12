@@ -1,10 +1,11 @@
 package com.cvdatabase.project.controllers;
 
-import com.cvdatabase.project.dto.PersonDto;
 import com.cvdatabase.project.api.services.IPersonService;
+import com.cvdatabase.project.dto.PersonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -26,8 +27,12 @@ public class PersonController {
 
     //Read
     @GetMapping
-    public List<PersonDto> getAll() {
-        return personService.getAllPersons();
+    public ModelAndView getAllPersons(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<PersonDto> persons = personService.getAllPersons();
+        modelAndView.setViewName("views/persons");
+        modelAndView.addObject("personsList", persons);
+        return modelAndView;
     }
 
     @GetMapping(value = "/{id}")
@@ -36,13 +41,23 @@ public class PersonController {
     }
 
     @GetMapping(value = "/first_name/{firstName}")
-    public List<PersonDto> getByFirstName(@PathVariable String firstName) {
-        return personService.getByFirstName(firstName);
+    public ModelAndView getByFirstName(@RequestParam String firstName) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<PersonDto> persons = personService.getByFirstName(firstName);
+        modelAndView.setViewName("views/persons");
+        modelAndView.addObject("personsList", persons);
+        modelAndView.addObject("firstName", firstName);
+        return modelAndView;
     }
 
     @GetMapping(value = "/last_name/{lastName}")
-    public List<PersonDto> getByLastName(@PathVariable String lastName) {
-        return personService.getByLastName(lastName);
+    public ModelAndView getByLastName(@RequestParam String lastName) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<PersonDto> persons = personService.getByLastName(lastName);
+        modelAndView.setViewName("views/persons");
+        modelAndView.addObject("personsList", persons);
+        modelAndView.addObject("lastName", lastName);
+        return modelAndView;
     }
 
     @GetMapping(value = "/full_name/{firstName}/{lastName}")
