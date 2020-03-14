@@ -3,12 +3,14 @@
 <head>
     <title>Резюме менеджер</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="../../../resources/static/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/static/css/core.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="../../../resources/static/css/core.css" rel="stylesheet" media="screen"
+          th:href="@{/resources/static/css/core.css}"/>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
-<div class="form-row"><!-- это блок для строки поиска по сообщениям -->
+<div class="form-row ml-1"><!-- это блок для строки поиска по сообщениям -->
     <div class="form-group col-md-6">
         <form method="get" action="/cvs/first_name/{firstName}" class="form-inline">
             <input type="text" name="firstName" class="form-control" placeholder="По имени">
@@ -18,7 +20,7 @@
         </form>
     </div>
 </div>
-<div class="form-row"><!-- это блок для строки поиска по сообщениям -->
+<div class="form-row ml-1"><!-- это блок для строки поиска по сообщениям -->
     <div class="form-group col-md-6">
         <form method="get" action="/cvs/last_name/{lastName}" class="form-inline">
             <input type="text" name="lastName" class="form-control" placeholder="По фамилии">
@@ -28,7 +30,7 @@
         </form>
     </div>
 </div>
-<div>
+<div class="table-responsive-lg">
     <table class="table">
         <thead>
         <tr>
@@ -48,18 +50,33 @@
         </thead>
         <tbody>
         <tr th:each="cv : ${cvsList}">
-            <td th:text="${cv.id}">ID</td>
-            <td th:text="${cv.firstName}">Имя</td>
-            <td th:text="${cv.lastName}">Фамилия</td>
-            <td th:text="${cv.middleName}">Отчество</td>
-            <td th:text="${cv.birthDate}">Дата рождения</td>
-            <td th:text="${cv.gender}">Пол</td>
-            <td th:text="${cv.mobilePhone}">Мобильный телефон</td>
-            <td th:text="${cv.email}">Email</td>
-            <td th:text="${cv.gitHub}">GitHub</td>
-            <td th:text="${cv.linkedIn}">Linkedin</td>
-            <td th:text="${cv.jobsTutBy}">РАБОТА.TUT.BY</td>
-            <td th:text="${cv.technologies}">Технологии</td>
+            <td class="align-middle" th:text="${cv.id}"></td>
+            <td class="align-middle" th:text="${cv.firstName}"></td>
+            <td class="align-middle" th:text="${cv.lastName}"></td>
+            <td class="align-middle" th:text="${cv.middleName}"></td>
+            <td class="align-middle" th:text="${cv.birthDate}"></td>
+            <td class="align-middle">
+                <span th:if="${cv.gender.toString() == 'F'}">женщина</span>
+                <span th:unless="${cv.gender.toString() == 'F'}">мужчина</span>
+            </td>
+            <td class="align-middle" th:text="${cv.mobilePhone}"></td>
+            <td class="align-middle" th:text="${cv.email}"></td>
+            <td class="align-middle">
+                <a th:href="${cv.gitHub}" th:text="${cv.gitHub}"/>
+            </td>
+            <td class="align-middle">
+                <a th:href="${cv.linkedIn}" th:text="${cv.linkedIn}"/>
+            </td>
+            <td class="align-middle">
+                <a th:href="${cv.jobsTutBy}" th:text="${cv.jobsTutBy}"/>
+            </td>
+            <td class="align-middle" th:switch="${#lists.size(cv.technologies)}">
+                <span th:case="'0'">NO Technologies!</span>
+                <span th:case="'1'" th:text="${cv.technologies[0].name}"></span>
+                <div th:case="*">
+                    <div th:each="technology:${cv.technologies}" th:text="${technology.name}"/>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

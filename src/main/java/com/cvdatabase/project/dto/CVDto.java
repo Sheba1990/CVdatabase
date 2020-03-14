@@ -2,6 +2,7 @@ package com.cvdatabase.project.dto;
 
 import com.cvdatabase.project.entities.CV;
 import com.cvdatabase.project.entities.Gender;
+import com.cvdatabase.project.entities.Technology;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class CVDto extends ADto {
     public static List<CVDto> convertList(List<CV> cvList) {
         List<CVDto> cvs = new ArrayList<>();
         for (CV cv : cvList) {
+            List<TechnologyDto> technologies = new ArrayList<>();
             CVDto cvDto = new CVDto();
             cvDto.setId(cv.getId());
             if (cv.getPerson() != null) {
@@ -54,9 +56,16 @@ public class CVDto extends ADto {
                 cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
                 cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
             }
-            if (cv.getPerson().getTechnologies() != null) {
-                cvDto.setTechnologies(TechnologyDto.convertList(cv.getPerson().getTechnologies()));
+            for (Technology technology : cv.getPerson().getTechnologies()) {
+                TechnologyDto technologyDto = new TechnologyDto();
+                if (cv.getPerson().getTechnologies() != null) {
+                    technologyDto.setName(technology.getName());
+                    technologies.add(technologyDto);
+                } else {
+                    cvDto.setTechnologies(null);
+                }
             }
+            cvDto.setTechnologies(technologies);
             cvs.add(cvDto);
         }
         return cvs;
@@ -64,6 +73,7 @@ public class CVDto extends ADto {
 
     public static CVDto entityToDto(CV cv) {
         CVDto cvDto = new CVDto();
+        List<TechnologyDto> technologies = new ArrayList<>();
         cvDto.setId(cv.getId());
         if (cv.getPerson() != null) {
             cvDto.setFirstName(cv.getPerson().getFirstName());
@@ -79,9 +89,16 @@ public class CVDto extends ADto {
             cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
             cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
         }
-        if (cv.getPerson().getTechnologies() != null) {
-            cvDto.setTechnologies(TechnologyDto.convertList(cv.getPerson().getTechnologies()));
+        for (Technology technology : cv.getPerson().getTechnologies()) {
+            TechnologyDto technologyDto = new TechnologyDto();
+            if (cv.getPerson().getTechnologies() != null) {
+                technologyDto.setName(technology.getName());
+                technologies.add(technologyDto);
+            } else {
+                cvDto.setTechnologies(null);
+            }
         }
+        cvDto.setTechnologies(technologies);
         return cvDto;
     }
 
@@ -180,7 +197,7 @@ public class CVDto extends ADto {
         this.jobsTutBy = jobsTutBy;
     }
 
-    public List<TechnologyDto> getTechnologies() {
+    public List<TechnologyDto > getTechnologies() {
         return technologies;
     }
 
