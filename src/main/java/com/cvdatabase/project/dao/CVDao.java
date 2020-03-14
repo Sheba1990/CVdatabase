@@ -1,17 +1,13 @@
 package com.cvdatabase.project.dao;
 
 import com.cvdatabase.project.api.dao.ICVDao;
-import com.cvdatabase.project.entities.CV;
-import com.cvdatabase.project.entities.Person;
-import com.cvdatabase.project.entities.Technology;
-import com.cvdatabase.project.entities.metamodels.CV_;
-import com.cvdatabase.project.entities.metamodels.Person_;
-import com.cvdatabase.project.entities.metamodels.Technology_;
+import com.cvdatabase.project.entities.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -27,9 +23,11 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<CV> query = criteriaBuilder.createQuery(CV.class);
             Root<CV> root = query.from(CV.class);
-            Join<CV, Technology> join = root.join(CV_.TECHNOLOGIES);
-            Predicate predicateForTechnologyName = criteriaBuilder.equal(join.get(Technology_.NAME), name);
-            query.select(root).where(predicateForTechnologyName);
+            Join<CV, Person> person = root.join(CV_.PERSON);
+            Join<Person, Technology> technology = person.join(Person_.TECHNOLOGIES);
+            List<Predicate> conditions = new ArrayList<>();
+            conditions.add(criteriaBuilder.equal(technology.get(Technology_.name), name));
+            query.select(root).where(conditions.toArray(new Predicate[] {}));
             TypedQuery<CV> result = entityManager.createQuery(query);
             return result.getResultList();
         } catch (NoResultException e) {

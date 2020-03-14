@@ -8,20 +8,20 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
-<div class="form-row"><!-- это блок для строки поиска по сообщениям -->
+<div class="form-row ml-1"><!-- это блок для строки поиска по сообщениям -->
     <div class="form-group col-md-6">
         <form method="get" action="/persons/first_name/{firstName}" class="form-inline">
-            <input type="text" name="firstName" class="form-control" placeholder="Найти по имени">
+            <input type="text" name="firstName" class="form-control" placeholder="По имени">
             <button type="submit" class="btn btn-primary ml-2">
                 Найти
             </button>
         </form>
     </div>
 </div>
-<div class="form-row"><!-- это блок для строки поиска по сообщениям -->
+<div class="form-row ml-1"><!-- это блок для строки поиска по сообщениям -->
     <div class="form-group col-md-6">
         <form method="get" action="/persons/last_name/{lastName}" class="form-inline">
-            <input type="text" name="lastName" class="form-control" placeholder="Найти по фамилии">
+            <input type="text" name="lastName" class="form-control" placeholder="По фамилии">
             <button type="submit" class="btn btn-primary ml-2">
                 Найти
             </button>

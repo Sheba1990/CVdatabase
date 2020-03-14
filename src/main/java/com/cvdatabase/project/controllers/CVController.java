@@ -75,6 +75,16 @@ public class CVController {
         return cvService.getCVByPersonFullName(firstName, lastName);
     }
 
+    @GetMapping(value = "/technology_name/{name}")
+    public ModelAndView hetCVByTechnologyName(@RequestParam String name) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<CVDto> cvs = cvService.getByTechnologyName(name);
+        modelAndView.setViewName("views/cvs");
+        modelAndView.addObject("cvsList", cvs);
+        modelAndView.addObject("name", name);
+        return modelAndView;
+    }
+
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateCV(@PathVariable long id, @RequestBody CVDto cvDto) {
         cvService.updateCV(id, cvDto);
