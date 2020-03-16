@@ -98,7 +98,9 @@ public class PersonService implements IPersonService {
     public PersonDto addContactDataToPerson(long contactDataId, long personId) {
         ContactData contactData = contactDataDao.get(contactDataId);
         Person person = personDao.get(personId);
-        person.setContactData(contactData);
+        if (person.getContactData() == null) {
+            person.setContactData(contactData);
+        }
         personDao.update(person);
         return PersonDto.entityToDto(person);
     }

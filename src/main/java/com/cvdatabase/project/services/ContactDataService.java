@@ -28,7 +28,6 @@ public class ContactDataService implements IContactDataService {
         contactData.setEmail(contactDataDto.getEmail());
         contactData.setGitHub(contactDataDto.getGitHub());
         contactData.setLinkedIn(contactDataDto.getLinkedIn());
-        contactData.setJobsTutBy(contactDataDto.getJobsTutBy());
         return ContactDataDto.entityToDto(contactDataDao.create(contactData));
     }
 
@@ -53,9 +52,6 @@ public class ContactDataService implements IContactDataService {
         }
         if (contactDataDto.getLinkedIn() != null && !StringUtils.isEmpty(contactDataDto.getLinkedIn())) {
             contactData.setLinkedIn(contactDataDto.getLinkedIn());
-        }
-        if (contactDataDto.getJobsTutBy() != null && !StringUtils.isEmpty(contactDataDto.getJobsTutBy())) {
-            contactData.setJobsTutBy(contactDataDto.getJobsTutBy());
         }
         contactDataDao.update(contactData);
     }

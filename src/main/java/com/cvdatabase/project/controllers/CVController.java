@@ -29,7 +29,7 @@ public class CVController {
     @Autowired
     ITechnologyService technologyService;
 
-    @PostMapping(value = "/",
+    @PostMapping(value = "/new",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public CVDto addCV(CVDto cvDto) {

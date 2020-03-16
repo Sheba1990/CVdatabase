@@ -36,7 +36,6 @@ public class TechnologyDto extends ADto {
                 personDto.setFirstName(person.getFirstName());
                 personDto.setLastName(person.getLastName());
                 personDto.setMobilePhone(person.getContactData().getMobilePhone());
-                personDto.setEmail(person.getContactData().getEmail());
                 persons.add(personDto);
             } else {
                 technology.setPersons(null);

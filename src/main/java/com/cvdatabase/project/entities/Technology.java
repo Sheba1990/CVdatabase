@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "technologies_table")
 public class Technology extends AEntity {
 
-    @Column(name = "name")
+    @Column(name = "technology_name")
     private String name;
 
     @ManyToMany(mappedBy = "technologies")

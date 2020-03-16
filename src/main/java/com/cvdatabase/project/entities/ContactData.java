@@ -10,21 +10,21 @@ import javax.validation.constraints.Email;
 @Table(name = "contact_data_table")
 public class ContactData extends AEntity {
 
-    @Column(name = "mobile_phone_number")
+    @Column(name = "mobilephone")
     private String mobilePhone;
 
     @Email
     @Column(name = "email")
     private String email;
 
-    @Column(name = "gitHub")
+    @Column(name = "github")
     private String gitHub;
 
-    @Column(name = "linked_in")
-    private String linkedIn;
+    @Column(name = "skype")
+    private String skype;
 
-    @Column(name = "jobs_tut_by")
-    private String jobsTutBy;
+    @Column(name = "linkedin")
+    private String linkedIn;
 
     @OneToOne(mappedBy = "contactData")
     private Person person;
@@ -32,13 +32,12 @@ public class ContactData extends AEntity {
     public ContactData() {
     }
 
-    public ContactData(String mobilePhone, @Email String email, String gitHub, String linkedIn, String jobsTutBy, Person person) {
+    public ContactData(String mobilePhone, @Email String email, String gitHub, String skype, String linkedIn, String jobsTutBy) {
         this.mobilePhone = mobilePhone;
         this.email = email;
         this.gitHub = gitHub;
+        this.skype = skype;
         this.linkedIn = linkedIn;
-        this.jobsTutBy = jobsTutBy;
-        this.person = person;
     }
 
     public String getMobilePhone() {
@@ -73,14 +72,6 @@ public class ContactData extends AEntity {
         this.linkedIn = linkedIn;
     }
 
-    public String getJobsTutBy() {
-        return jobsTutBy;
-    }
-
-    public void setJobsTutBy(String jobsTutBy) {
-        this.jobsTutBy = jobsTutBy;
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -89,4 +80,11 @@ public class ContactData extends AEntity {
         this.person = person;
     }
 
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
 }

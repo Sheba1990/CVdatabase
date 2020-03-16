@@ -10,8 +10,9 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
-<div class="form-row ml-1">
-    <div class="form-group col-md-6">
+<br/>
+<div class="form-row mx-auto">
+    <div class="form-group col-sm-4 md-6">
         <form method="get" action="/cvs/first_name/{firstName}" class="form-inline">
             <input type="text" name="firstName" class="form-control" placeholder="По имени">
             <button type="submit" class="btn btn-primary ml-2">
@@ -19,50 +20,47 @@
             </button>
         </form>
     </div>
-</div>
-<div class="form-row ml-1">
-    <div class="form-group col-md-6">
+    <div class="form-group col-sm-4 md-6">
         <form method="get" action="/cvs/last_name/{lastName}" class="form-inline">
-            <input type="text" name="lastName" class="form-control" placeholder="По фамилии">
+            <input type="text" name="name" class="form-control" placeholder="По фамилии">
             <button type="submit" class="btn btn-primary ml-2">
                 Найти
             </button>
         </form>
     </div>
-</div>
-<div class="form-row ml-1">
-    <div class="form-group col-md-6">
+    <div class="form-group col-sm-4 md-6">
         <form method="get" action="/cvs/technology_name/{name}" class="form-inline">
-            <input type="text" name="name" class="form-control" placeholder="По технологии">
+            <input type="text" name="lastName" class="form-control" placeholder="По технологии">
             <button type="submit" class="btn btn-primary ml-2">
                 Найти
             </button>
         </form>
     </div>
 </div>
-<div class="table-responsive-lg">
-    <table class="table">
-        <thead>
+<br/>
+<div class="table-responsive-lg ">
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
         <tr>
-            <th scope="col" class="align-middle">ID</th>
-            <th scope="col" class="align-middle">Имя</th>
+            <th scope="col" class="align-middle ">ID</th>
             <th scope="col" class="align-middle">Фамилия</th>
+            <th scope="col" class="align-middle">Имя</th>
             <th scope="col" class="align-middle">Отчество</th>
             <th scope="col" class="align-middle">Дата рождения</th>
             <th scope="col" class="align-middle">Пол</th>
             <th scope="col" class="align-middle">Мобильный телефон</th>
             <th scope="col" class="align-middle">Email</th>
             <th scope="col" class="align-middle">GitHub</th>
+            <th scope="col" class="align-middle">Skype</th>
             <th scope="col" class="align-middle">Linkedin</th>
-            <th scope="col" class="align-middle">РАБОТА.TUT.BY</th>
             <th scope="col" class="align-middle">Технологии</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cv : ${cvsList}">
             <td class="align-middle" th:text="${cv.id}"></td>
-            <td class="align-middle" th:text="${cv.firstName}"></td>
             <td class="align-middle" th:text="${cv.lastName}"></td>
+            <td class="align-middle" th:text="${cv.firstName}"></td>
             <td class="align-middle" th:text="${cv.middleName}"></td>
             <td class="align-middle" th:text="${cv.birthDate}"></td>
             <td class="align-middle">
@@ -70,17 +68,15 @@
                 <span th:unless="${cv.gender.toString() == 'F'}">мужчина</span>
             </td>
             <td class="align-middle" th:text="${cv.mobilePhone}"></td>
-            <td class="align-middle" th:text="${cv.email}"></td>
-            <td class="align-middle">
+            <td class="h6 small align-middle" th:text="${cv.email}"></td>
+            <td class="h6 small align-middle">
                 <a th:href="${cv.gitHub}" th:text="${cv.gitHub}"/>
             </td>
-            <td class="align-middle">
+            <td class="align-middle" th:text="${cv.skype}"></td>
+            <td class="h6 small align-middle">
                 <a th:href="${cv.linkedIn}" th:text="${cv.linkedIn}"/>
             </td>
-            <td class="align-middle">
-                <a th:href="${cv.jobsTutBy}" th:text="${cv.jobsTutBy}"/>
-            </td>
-            <td class="align-middle" th:switch="${#lists.size(cv.technologies)}">
+            <td class="h6 small align-middle" th:switch="${#lists.size(cv.technologies)}">
                 <span th:case="'0'">NO Technologies!</span>
                 <span th:case="'1'" th:text="${cv.technologies[0].name}"></span>
                 <div th:case="*">
@@ -91,5 +87,12 @@
         </tbody>
     </table>
 </div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </body>
 </html>

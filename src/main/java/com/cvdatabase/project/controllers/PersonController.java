@@ -18,11 +18,26 @@ public class PersonController {
     IPersonService personService;
 
     //Create
-    @PostMapping(value = "/",
+
+    @GetMapping(value = "/new")
+    public ModelAndView showNewPersonForm() {
+        PersonDto personDto = new PersonDto();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("views/new_person");
+        modelAndView.addObject("person", personDto);
+        return modelAndView;
+    }
+
+
+
+    @PostMapping(value = "/save",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonDto addPerson(@RequestBody PersonDto personDto) {
-        return personService.addPerson(personDto);
+    public ModelAndView addPerson(@RequestBody PersonDto personDto) {
+        ModelAndView modelAndView = new ModelAndView();
+        personService.addPerson(personDto);
+        modelAndView.setViewName("redirect:/views/persons");
+        return modelAndView;
     }
 
     //Read

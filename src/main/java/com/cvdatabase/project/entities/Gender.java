@@ -1,6 +1,6 @@
 package com.cvdatabase.project.entities;
 
-public enum Gender {
+public enum Gender{
     M,
     F
 }

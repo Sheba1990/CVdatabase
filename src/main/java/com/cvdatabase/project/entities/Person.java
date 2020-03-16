@@ -1,7 +1,6 @@
 package com.cvdatabase.project.entities;
 
 import com.cvdatabase.project.utils.StringToDateSQLConverter;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.List;

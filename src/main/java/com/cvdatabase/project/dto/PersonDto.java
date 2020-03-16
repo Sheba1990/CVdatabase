@@ -26,9 +26,6 @@ public class PersonDto extends ADto {
     private String mobilePhone;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String email;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<TechnologyDto> technologies;
 
     public static List<PersonDto> convertList(List<Person> personList) {
@@ -44,10 +41,8 @@ public class PersonDto extends ADto {
             personDto.setBirthDate(person.getBirthDate());
             if (person.getContactData() != null) {
                 personDto.setMobilePhone(person.getContactData().getMobilePhone());
-                personDto.setEmail(person.getContactData().getEmail());
             } else {
                 personDto.setMobilePhone(null);
-                personDto.setEmail(null);
             }
             persons.add(personDto);
         }
@@ -65,10 +60,8 @@ public class PersonDto extends ADto {
         personDto.setBirthDate(person.getBirthDate());
         if (person.getContactData() != null) {
             personDto.setMobilePhone(person.getContactData().getMobilePhone());
-            personDto.setEmail(person.getContactData().getEmail());
         } else {
             personDto.setMobilePhone(null);
-            personDto.setEmail(null);
         }
         return personDto;
     }
@@ -84,7 +77,6 @@ public class PersonDto extends ADto {
         this.gender = person.getGender();
         this.birthDate = person.getBirthDate();
         this.mobilePhone = person.getContactData().getMobilePhone();
-        this.email = person.getContactData().getEmail();
         this.technologies = TechnologyDto.convertList(person.getTechnologies());
     }
 
@@ -134,14 +126,6 @@ public class PersonDto extends ADto {
 
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public List<TechnologyDto> getTechnologies() {

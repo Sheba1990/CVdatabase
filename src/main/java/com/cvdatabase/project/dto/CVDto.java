@@ -16,20 +16,28 @@ public class CVDto extends ADto {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String middleName;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Gender gender;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String birthDate;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String mobilePhone;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String gitHub;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String skype;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String linkedIn;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String jobsTutBy;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<TechnologyDto> technologies;
 
@@ -53,8 +61,8 @@ public class CVDto extends ADto {
                 cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
                 cvDto.setEmail(cv.getPerson().getContactData().getEmail());
                 cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
+                cvDto.setSkype(cv.getPerson().getContactData().getSkype());
                 cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
-                cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
             }
             for (Technology technology : cv.getPerson().getTechnologies()) {
                 TechnologyDto technologyDto = new TechnologyDto();
@@ -86,8 +94,8 @@ public class CVDto extends ADto {
             cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
             cvDto.setEmail(cv.getPerson().getContactData().getEmail());
             cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
+            cvDto.setSkype(cv.getPerson().getContactData().getSkype());
             cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
-            cvDto.setJobsTutBy(cv.getPerson().getContactData().getJobsTutBy());
         }
         for (Technology technology : cv.getPerson().getTechnologies()) {
             TechnologyDto technologyDto = new TechnologyDto();
@@ -112,8 +120,8 @@ public class CVDto extends ADto {
         this.mobilePhone = cv.getPerson().getContactData().getMobilePhone();
         this.email = cv.getPerson().getContactData().getEmail();
         this.gitHub = cv.getPerson().getContactData().getGitHub();
+        this.skype = cv.getPerson().getContactData().getSkype();
         this.linkedIn = cv.getPerson().getContactData().getLinkedIn();
-        this.jobsTutBy = cv.getPerson().getContactData().getJobsTutBy();
         this.technologies = TechnologyDto.convertList(cv.getPerson().getTechnologies());
     }
 
@@ -189,14 +197,6 @@ public class CVDto extends ADto {
         this.linkedIn = linkedIn;
     }
 
-    public String getJobsTutBy() {
-        return jobsTutBy;
-    }
-
-    public void setJobsTutBy(String jobsTutBy) {
-        this.jobsTutBy = jobsTutBy;
-    }
-
     public List<TechnologyDto > getTechnologies() {
         return technologies;
     }
@@ -205,4 +205,11 @@ public class CVDto extends ADto {
         this.technologies = technologies;
     }
 
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
 }

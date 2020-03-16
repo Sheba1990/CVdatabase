@@ -18,10 +18,10 @@ public class ContactDataDto extends ADto {
     private String gitHub;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String linkedIn;
+    private String skype;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String jobsTutBy;
+    private String linkedIn;
 
     private String personFirstName;
 
@@ -35,8 +35,8 @@ public class ContactDataDto extends ADto {
             contactDataDto.setMobilePhone(contactData.getMobilePhone());
             contactDataDto.setEmail(contactData.getEmail());
             contactDataDto.setGitHub(contactData.getGitHub());
+            contactDataDto.setSkype(contactData.getSkype());
             contactDataDto.setLinkedIn(contactData.getLinkedIn());
-            contactDataDto.setJobsTutBy(contactData.getJobsTutBy());
             if (contactData.getPerson() != null) {
                 contactDataDto.setPersonFirstName(contactData.getPerson().getFirstName());
                 contactDataDto.setPersonLastName(contactData.getPerson().getLastName());
@@ -54,8 +54,8 @@ public class ContactDataDto extends ADto {
         contactDataDto.setMobilePhone(contactData.getMobilePhone());
         contactDataDto.setEmail(contactData.getEmail());
         contactDataDto.setGitHub(contactData.getGitHub());
+        contactDataDto.setSkype(contactData.getSkype());
         contactDataDto.setLinkedIn(contactData.getLinkedIn());
-        contactDataDto.setJobsTutBy(contactData.getJobsTutBy());
         if (contactData.getPerson() != null) {
             contactDataDto.setPersonFirstName(contactData.getPerson().getFirstName());
             contactDataDto.setPersonLastName(contactData.getPerson().getLastName());
@@ -73,7 +73,7 @@ public class ContactDataDto extends ADto {
         this.mobilePhone = contactData.getMobilePhone();
         this.email = contactData.getEmail();
         this.gitHub = contactData.getGitHub();
-        this.jobsTutBy = contactData.getJobsTutBy();
+        this.skype = contactData.getSkype();
         this.linkedIn = contactData.getLinkedIn();
         this.personFirstName = contactData.getPerson().getFirstName();
         this.personLastName = contactData.getPerson().getLastName();
@@ -111,14 +111,6 @@ public class ContactDataDto extends ADto {
         this.linkedIn = linkedIn;
     }
 
-    public String getJobsTutBy() {
-        return jobsTutBy;
-    }
-
-    public void setJobsTutBy(String jobsTutBy) {
-        this.jobsTutBy = jobsTutBy;
-    }
-
     public String getPersonFirstName() {
         return personFirstName;
     }
@@ -135,4 +127,11 @@ public class ContactDataDto extends ADto {
         this.personLastName = personLastName;
     }
 
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
 }

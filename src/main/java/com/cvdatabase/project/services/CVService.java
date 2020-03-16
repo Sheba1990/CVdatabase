@@ -4,13 +4,21 @@ import com.cvdatabase.project.api.dao.ICVDao;
 import com.cvdatabase.project.api.dao.IPersonDao;
 import com.cvdatabase.project.api.services.ICVService;
 import com.cvdatabase.project.dto.CVDto;
+import com.cvdatabase.project.dto.ContactDataDto;
+import com.cvdatabase.project.dto.PersonDto;
 import com.cvdatabase.project.entities.CV;
+import com.cvdatabase.project.entities.ContactData;
+import com.cvdatabase.project.entities.Gender;
 import com.cvdatabase.project.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -28,6 +36,7 @@ public class CVService implements ICVService {
 
     public CVDto addCV(CVDto cvDto) {
         CV cv = new CV();
+
         return CVDto.entityToDto(cvDao.create(cv));
     }
 
