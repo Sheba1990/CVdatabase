@@ -28,6 +28,7 @@ public class ContactDataService implements IContactDataService {
         contactData.setEmail(contactDataDto.getEmail());
         contactData.setGitHub(contactDataDto.getGitHub());
         contactData.setLinkedIn(contactDataDto.getLinkedIn());
+        contactData.setSkype(contactDataDto.getSkype());
         return ContactDataDto.entityToDto(contactDataDao.create(contactData));
     }
 

@@ -10,7 +10,7 @@ public interface ICVService {
 
     public List<CVDto> getAllCVs();
 
-    CVDto addCV(CVDto cvDto);
+    CVDto addCV(CVDto cvDto, PersonDto personDto, ContactDataDto contactDataDto);
 
     CVDto getCVbyId(long id);
 

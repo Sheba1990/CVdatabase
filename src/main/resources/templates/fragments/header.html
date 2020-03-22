@@ -19,13 +19,16 @@
             <li class="nav-item active ml-1">
                 <a class="nav-link" href="/">Главная страница<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/cvs">Список всех резюме</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenu1" role="button" aria-expanded="false">
+                    Резюме
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/cvs">Все резюме</a>
+                    <a class="dropdown-item" href="/cvs/new">Добавить резюме</a>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/persons">Список всех соискателей</a>
-            </li>
-            <!--li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenu2" role="button" aria-expanded="false">
                     Соискатели
                 </a>
@@ -33,7 +36,7 @@
                     <a class="dropdown-item" href="/persons">Все соискатели</a>
                     <a class="dropdown-item" href="/persons/new">Добавить соискателя</a>
                 </div>
-            </li -->
+            </li>
         </ul>
     </div>
 </nav>

@@ -5,15 +5,16 @@ import com.cvdatabase.project.api.services.IContactDataService;
 import com.cvdatabase.project.api.services.IPersonService;
 import com.cvdatabase.project.api.services.ITechnologyService;
 import com.cvdatabase.project.dto.CVDto;
+import com.cvdatabase.project.dto.ContactDataDto;
+import com.cvdatabase.project.dto.PersonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/cvs")
 public class CVController {
 
@@ -29,11 +30,29 @@ public class CVController {
     @Autowired
     ITechnologyService technologyService;
 
-    @PostMapping(value = "/new",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public CVDto addCV(CVDto cvDto) {
-        return cvService.addCV(cvDto);
+    @GetMapping("/new")
+    public ModelAndView showNewCVForm() {
+        CVDto cvDto = new CVDto();
+        PersonDto personDto = new PersonDto();
+        ContactDataDto contactDataDto = new ContactDataDto();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("cv", cvDto);
+        modelAndView.addObject("person", personDto);
+        modelAndView.addObject("contacts", contactDataDto);
+        modelAndView.setViewName("views/new_cv");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/save",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ModelAndView addCV(
+             CVDto cvDto,
+             PersonDto personDto,
+             ContactDataDto contactDataDto) {
+        ModelAndView modelAndView = new ModelAndView();
+        cvService.addCV(cvDto, personDto, contactDataDto);
+        modelAndView.setViewName("redirect:/cvs");
+        return modelAndView;
     }
 
     @GetMapping

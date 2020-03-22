@@ -89,24 +89,24 @@ public class CVDto extends ADto {
             cvDto.setMiddleName(cv.getPerson().getMiddleName());
             cvDto.setGender(cv.getPerson().getGender());
             cvDto.setBirthDate(cv.getPerson().getBirthDate());
-        }
-        if (cv.getPerson().getContactData() != null) {
-            cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
-            cvDto.setEmail(cv.getPerson().getContactData().getEmail());
-            cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
-            cvDto.setSkype(cv.getPerson().getContactData().getSkype());
-            cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
-        }
-        for (Technology technology : cv.getPerson().getTechnologies()) {
-            TechnologyDto technologyDto = new TechnologyDto();
-            if (cv.getPerson().getTechnologies() != null) {
-                technologyDto.setName(technology.getName());
-                technologies.add(technologyDto);
-            } else {
-                cvDto.setTechnologies(null);
+
+            if (cv.getPerson().getContactData() != null) {
+                cvDto.setMobilePhone(cv.getPerson().getContactData().getMobilePhone());
+                cvDto.setEmail(cv.getPerson().getContactData().getEmail());
+                cvDto.setGitHub(cv.getPerson().getContactData().getGitHub());
+                cvDto.setSkype(cv.getPerson().getContactData().getSkype());
+                cvDto.setLinkedIn(cv.getPerson().getContactData().getLinkedIn());
             }
+
+            if (cv.getPerson().getTechnologies() != null) {
+                for (Technology technology : cv.getPerson().getTechnologies()) {
+                    TechnologyDto technologyDto = new TechnologyDto();
+                    technologyDto.setName(technology.getName());
+                    technologies.add(technologyDto);
+                }
+            }
+            cvDto.setTechnologies(technologies);
         }
-        cvDto.setTechnologies(technologies);
         return cvDto;
     }
 

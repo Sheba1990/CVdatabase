@@ -31,12 +31,11 @@ public class PersonController {
 
 
     @PostMapping(value = "/save",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView addPerson(@RequestBody PersonDto personDto) {
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ModelAndView addPerson(PersonDto personDto) {
         ModelAndView modelAndView = new ModelAndView();
         personService.addPerson(personDto);
-        modelAndView.setViewName("redirect:/views/persons");
+        modelAndView.setViewName("redirect:/persons");
         return modelAndView;
     }
 

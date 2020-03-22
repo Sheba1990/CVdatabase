@@ -1,6 +1,7 @@
 package com.cvdatabase.project.services;
 
 import com.cvdatabase.project.api.dao.ICVDao;
+import com.cvdatabase.project.api.dao.IContactDataDao;
 import com.cvdatabase.project.api.dao.IPersonDao;
 import com.cvdatabase.project.api.services.ICVService;
 import com.cvdatabase.project.dto.CVDto;
@@ -8,17 +9,15 @@ import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.dto.PersonDto;
 import com.cvdatabase.project.entities.CV;
 import com.cvdatabase.project.entities.ContactData;
-import com.cvdatabase.project.entities.Gender;
 import com.cvdatabase.project.entities.Person;
+import com.cvdatabase.project.entities.Technology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,14 +29,36 @@ public class CVService implements ICVService {
     @Autowired
     IPersonDao personDao;
 
+    @Autowired
+    IContactDataDao contactDataDao;
+
     public List<CVDto> getAllCVs() {
         return CVDto.convertList(cvDao.getAll());
     }
 
-    public CVDto addCV(CVDto cvDto) {
-        CV cv = new CV();
+    public CVDto addCV(CVDto cvDto, PersonDto personDto, ContactDataDto contactDataDto) {
+        ContactData contactData = new ContactData();
+        contactData.setMobilePhone(contactDataDto.getMobilePhone());
+        contactData.setEmail(contactDataDto.getEmail());
+        contactData.setGitHub(contactDataDto.getGitHub());
+        contactData.setLinkedIn(contactDataDto.getLinkedIn());
+        contactData.setSkype(contactDataDto.getSkype());
+        contactDataDao.create(contactData);
 
-        return CVDto.entityToDto(cvDao.create(cv));
+        Person person = new Person();
+        person.setFirstName(personDto.getFirstName());
+        person.setLastName(personDto.getLastName());
+        person.setMiddleName(personDto.getMiddleName());
+        person.setGender(personDto.getGender());
+        person.setBirthDate(personDto.getBirthDate());
+        person.setContactData(contactData);
+        personDao.create(person);
+
+        CV cv = new CV();
+        cv.setPerson(person);
+        CV testCv = cvDao.create(cv);
+
+        return CVDto.entityToDto(testCv);
     }
 
     public CVDto getCVbyId(long id) {
