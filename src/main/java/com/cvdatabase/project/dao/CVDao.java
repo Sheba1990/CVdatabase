@@ -17,7 +17,6 @@ public class CVDao extends AGenericDao<CV> implements ICVDao {
         super(CV.class);
     }
 
-
     public List<CV> getCVByTechnologyName(String name) {
         try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

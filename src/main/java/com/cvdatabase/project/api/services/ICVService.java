@@ -22,7 +22,7 @@ public interface ICVService {
 
     public List<CVDto> getCVByPersonFullName(String firstName, String lastName);
 
-    void updateCV(long id, CVDto cvDto);
+    void updateCV(long id, CVDto cvDto, PersonDto personDto, ContactDataDto contactDataDto);
 
     void deleteCV(long id);
 

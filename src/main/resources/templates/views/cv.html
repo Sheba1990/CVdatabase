@@ -39,48 +39,65 @@
 </div>
 <br/>
 <div class="table-responsive-lg ">
-    <table class="table table-hover table-striped">
-        <thead class="thead-dark">
+    <table class="table">
+        <tr class="thead-dark">
         <tr>
-            <th scope="col" class="col-xs-1 text-center">ID</th>
-            <th scope="col" class="col-xs-1 text-center">Фамилия</th>
-            <th scope="col" class="col-xs-1 text-center">Имя</th>
-            <th scope="col" class="col-xs-1 text-center">Отчество</th>
-            <th scope="col" class="col-xs-1 text-center ">Дата рождения</th>
-            <th scope="col" class="col-xs-1 text-center">Пол</th>
-            <th scope="col" class="col-xs-1 text-center">Мобильный телефон</th>
-            <th scope="col" class="col-xs-1 text-center">Email</th>
-            <th scope="col" class="col-xs-1 text-center">Технологии</th>
-            <th scope="col" class="col-xs-1 text-center">Дополнительно</th>
+            <td scope="col" class="align-middle">Фамилия</td>
+            <td class="align-middle" th:text="${cv.lastName}"></td>
         </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cv : ${cvs}" >
-            <td class="align-middle col-xs-1 text-center"  th:text="${cv.id}"></td>
-            <td class="align-middle col-xs-1 text-center" th:text="${cv.lastName}"></td>
-            <td class="align-middle col-xs-1 text-center" th:text="${cv.firstName}"></td>
-            <td class="align-middle col-xs-1 text-center" th:text="${cv.middleName}"></td>
-            <td class="align-middle col-xs-1 text-center" th:text="${cv.birthDate}"></td>
-            <td class="align-middle col-xs-1 text-center">
+        <tr>
+            <td scope="col" class="align-middle">Имя</td>
+            <td class="align-middle" th:text="${cv.firstName}"></td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Отчество</td>
+            <td class="align-middle" th:text="${cv.middleName}"></td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Дата рождения</td>
+            <td class="align-middle" th:text="${cv.birthDate}"></td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Пол</td>
+            <td class="align-middle">
                 <span th:if="${cv.gender.toString() == 'F'}">женщина</span>
                 <span th:unless="${cv.gender.toString() == 'F'}">мужчина</span>
             </td>
-            <td class="h6 small align-middle col-xs-1 text-center" th:text="${cv.mobilePhone}"></td>
-            <td class="h6 small align-middle col-xs-1 text-center" th:text="${cv.email}"></td>
-            <td class="h6 small align-middle col-xs-1 text-center" th:switch="${#lists.size(cv.technologies)}">
-                <span th:case="'0'">No technologies!</span>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Мобильный телефон</td>
+            <td class="align-middle" th:text="${cv.mobilePhone}"></td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Email</td>
+            <td class="align-middle" th:text="${cv.email}"></td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">GitHub</td>
+            <td class="align-middle">
+                <a th:href="${cv.gitHub}" th:text="${cv.gitHub}"/>
+            </td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Skype</td>
+            <td class="align-middle" th:text="${cv.skype}"></td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Linkedin</td>
+            <td class="align-middle">
+                <a th:href="${cv.linkedIn}" th:text="${cv.linkedIn}"/>
+            </td>
+        </tr>
+        <tr>
+            <td scope="col" class="align-middle">Технологии</td>
+            <td class="align-middle" th:switch="${#lists.size(cv.technologies)}">
+                <span th:case="'0'">NO Technologies!</span>
                 <span th:case="'1'" th:text="${cv.technologies[0].name}"></span>
                 <div th:case="*">
                     <div th:each="technology:${cv.technologies}" th:text="${technology.name}"/>
                 </div>
             </td>
-            <td class="h6 small align-middle col-xs-1 text-center">
-                <a th:href="@{'/cvs/get_by_id/' + ${cv.id}}">Подробнее</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a th:href="@{'/cvs/edit_cv/' + ${cv.id}}">Редактировать</a>
-            </td>
         </tr>
-        </tbody>
     </table>
 </div>
 <!-- jQuery -->

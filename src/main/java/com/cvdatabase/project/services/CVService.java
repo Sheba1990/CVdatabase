@@ -3,19 +3,17 @@ package com.cvdatabase.project.services;
 import com.cvdatabase.project.api.dao.ICVDao;
 import com.cvdatabase.project.api.dao.IContactDataDao;
 import com.cvdatabase.project.api.dao.IPersonDao;
+import com.cvdatabase.project.api.dao.ITechnologyDao;
 import com.cvdatabase.project.api.services.ICVService;
 import com.cvdatabase.project.dto.CVDto;
 import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.dto.PersonDto;
-import com.cvdatabase.project.entities.CV;
-import com.cvdatabase.project.entities.ContactData;
-import com.cvdatabase.project.entities.Person;
-import com.cvdatabase.project.entities.Technology;
+import com.cvdatabase.project.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,11 +30,17 @@ public class CVService implements ICVService {
     @Autowired
     IContactDataDao contactDataDao;
 
+    @Autowired
+    ITechnologyDao technologyDao;
+
     public List<CVDto> getAllCVs() {
         return CVDto.convertList(cvDao.getAll());
     }
 
-    public CVDto addCV(CVDto cvDto, PersonDto personDto, ContactDataDto contactDataDto) {
+    public CVDto addCV(CVDto cvDto,
+                       PersonDto personDto,
+                       ContactDataDto contactDataDto) {
+
         ContactData contactData = new ContactData();
         contactData.setMobilePhone(contactDataDto.getMobilePhone());
         contactData.setEmail(contactDataDto.getEmail());
@@ -54,11 +58,12 @@ public class CVService implements ICVService {
         person.setContactData(contactData);
         personDao.create(person);
 
+
         CV cv = new CV();
         cv.setPerson(person);
-        CV testCv = cvDao.create(cv);
+        CV newCV = cvDao.create(cv);
 
-        return CVDto.entityToDto(testCv);
+        return CVDto.entityToDto(newCV);
     }
 
     public CVDto getCVbyId(long id) {
@@ -81,10 +86,47 @@ public class CVService implements ICVService {
         return CVDto.convertList(cvDao.getCVByPersonFullName(firstName, lastName));
     }
 
-    public void updateCV(long id, CVDto cvDto) {
+    public void updateCV(long id,
+                         CVDto cvDto,
+                         PersonDto personDto,
+                         ContactDataDto contactDataDto) {
         CV cv = cvDao.get(id);
-        if (cvDto != null) {
-            cv.setPerson(cv.getPerson());
+        Person person = cv.getPerson();
+        ContactData contactData = cv.getPerson().getContactData();
+        if (cv.getPerson() != null) {
+            if (cvDto.getMobilePhone() != null && !StringUtils.isEmpty(cvDto.getMobilePhone())) {
+                contactData.setMobilePhone(contactDataDto.getMobilePhone());
+            }
+            if (cvDto.getEmail() != null && !StringUtils.isEmpty(cvDto.getEmail())) {
+                contactData.setEmail(contactDataDto.getEmail());
+            }
+            if (cvDto.getGitHub() != null && !StringUtils.isEmpty(cvDto.getGitHub())) {
+                contactData.setGitHub(contactDataDto.getGitHub());
+            }
+            if (cvDto.getSkype() != null && !StringUtils.isEmpty(cvDto.getSkype())) {
+                contactData.setSkype(contactDataDto.getSkype());
+            }
+            if (cvDto.getLinkedIn() != null && !StringUtils.isEmpty(cvDto.getLinkedIn())) {
+                contactData.setLinkedIn(contactDataDto.getLinkedIn());
+            }
+            contactDataDao.update(contactData);
+
+            if (cvDto.getFirstName()!=null && !StringUtils.isEmpty(cvDto.getFirstName())) {
+                person.setFirstName(personDto.getFirstName());
+            }
+            if (cvDto.getLastName() != null && !StringUtils.isEmpty(cvDto.getLastName())) {
+                person.setLastName(personDto.getLastName());
+            }
+            if (cvDto.getMiddleName() != null && !StringUtils.isEmpty(cvDto.getMiddleName())) {
+                person.setMiddleName(personDto.getMiddleName());
+            }
+            if (cvDto.getBirthDate() != null && !StringUtils.isEmpty(cvDto.getBirthDate())) {
+                person.setBirthDate(personDto.getBirthDate());
+            }
+            if (cvDto.getGender() != null) {
+                person.setGender(personDto.getGender());
+            }
+            personDao.update(person);
         }
         cvDao.update(cv);
     }

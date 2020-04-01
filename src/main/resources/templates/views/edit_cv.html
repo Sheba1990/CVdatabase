@@ -9,27 +9,27 @@
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div align="center">
-    <h1>Добавить резюме</h1>
+    <h1>Редактировать резюме</h1>
     <br/>
-    <form th:action="@{/cvs/save}" method="post">
+    <form action="#" th:action="@{/cvs/edit/{id}(id=${cv.id})}" method="post">
         <div>
             <form>
                 <div class="form-row mx-auto">
                     <div class="col-md-3 mb-3 mx-auto">
                         <label>Фамилия</label>
-                        <input type="text" th:field="*{person.lastName}" class="form-control" placeholder="Фамилия">
+                        <input type="text" th:field="*{cv.lastName}" class="form-control" placeholder="Фамилия">
                     </div>
                     <div class="col-md-3 mb-3 mx-auto">
                         <label>Имя</label>
-                        <input type="text" th:field="*{person.firstName}" class="form-control" placeholder="Имя">
+                        <input type="text" th:field="*{cv.firstName}" class="form-control" placeholder="Имя">
                     </div>
                     <div class="col-md-3 mb-3 mx-auto">
                         <label>Отчество</label>
-                        <input type="text" th:field="*{person.middleName}" class="form-control" placeholder="Отчество">
+                        <input type="text" th:field="*{cv.middleName}" class="form-control" placeholder="Отчество">
                     </div>
                     <div class="col-md-2 mb-3 mx-auto">
                         <label>Пол</label>
-                        <select class="form-control" id="gender" th:field="*{person.gender}">
+                        <select class="form-control" id="gender" th:field="*{cv.gender}">
                             <option th:value="${T(com.cvdatabase.project.entities.Gender).M}" th:text="Мужской"></option>
                             <option th:value="${T(com.cvdatabase.project.entities.Gender).F}" th:text="Женский"></option>
                         </select>
@@ -38,53 +38,52 @@
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
                         <label>Дата рождения</label>
-                        <input type="text" th:field="*{person.birthDate}" class="form-control" placeholder="в формате 'дд.мм.гггг'">
+                        <input type="text" th:field="*{cv.birthDate}" class="form-control" placeholder="в формате 'дд.мм.гггг'">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{contacts.mobilePhone}" class="form-control" placeholder="Мобильный телефон">
+                        <input type="text" th:field="*{cv.mobilePhone}" class="form-control" placeholder="Мобильный телефон">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{contacts.email}" class="form-control" placeholder="Email">
+                        <input type="text" th:field="*{cv.email}" class="form-control" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{contacts.gitHub}" class="form-control" placeholder="GitHub">
+                        <input type="text" th:field="*{cv.gitHub}" class="form-control" placeholder="GitHub">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{contacts.skype}" class="form-control" placeholder="Skype">
+                        <input type="text" th:field="*{cv.skype}" class="form-control" placeholder="Skype">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{contacts.linkedIn}" class="form-control" placeholder="Linkedin">
+                        <input type="text" th:field="*{cv.linkedIn}" class="form-control" placeholder="Linkedin">
                     </div>
                 </div>
-                <ul>
-                    <!--div>
-                        <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
-                    </div-->
+                <!--ul>
                     <li th:each="technology : ${technologies}">
-                        <label><input type="checkbox" th:name="${technology.name}" ${cv.technologies$seq_contains(technology)?string("checked", "")}>${technology}</label>
+                        <label th:for="${technology.name}" th:text="${technology.name}"> name</label>
+                        <input type="checkbox" th:id="${technology.name}"
+                               th:name="${technology.name}"/>
                     </li>
-                </ul>
+                </ul-->
             </form>
             <div class="form-inline justify-content-center">
                 <div>
                     <button type="submit" class="btn btn-primary">
-                        Сохранить
+                        Сохранить изменения
                     </button>
                 </div>
                 <div class="ml-2">
-                    <form th:action="@{/cvs/}" th:method="get">
+                    <form th:action="@{'/cvs/delete/' + ${cv.id}}" th:method="delete">
                         <button class="btn btn-danger">
-                            Отмена
+                            Удалить резюме
                         </button>
                     </form>
                 </div>
