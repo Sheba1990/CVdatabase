@@ -21,43 +21,54 @@
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div align="center">
-    <h1>Добавить нового соискателя</h1>
+    <h1>Редактировать информацию о соискателе</h1>
     <br/>
-    <form action="#" th:action="@{/persons/save}" th:object="${person}" method="post">
+    <form action="#" th:action="@{/persons/edit/{id}(id=${person.id})}" method="post">
         <div>
             <form>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
                         <label>Ф.И.О.</label>
-                        <input type="text" th:field="*{lastName}" class="form-control" placeholder="Фамилия">
+                        <input type="text" th:field="*{person.lastName}" class="form-control" placeholder="Фамилия">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{firstName}" class="form-control" placeholder="Имя">
+                        <input type="text" th:field="*{person.firstName}" class="form-control" placeholder="Имя">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{middleName}" class="form-control" placeholder="Отчество">
+                        <input type="text" th:field="*{person.middleName}" class="form-control" placeholder="Отчество">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
                         <label>Дата рождения</label>
-                        <input type="text" th:field="*{birthDate}" class="form-control" placeholder="в формате 'дд.мм.гггг'">
+                        <input type="text" th:field="*{person.birthDate}" class="form-control" placeholder="в формате 'дд.мм.гггг'">
                     </div>
                 </div>
                 <div class="col-md-2 mb-3 mx-auto">
                     <label>Пол</label>
-                    <select class="form-control" id="gender" th:field="*{gender}">
+                    <select class="form-control" id="gender" th:field="*{person.gender}">
                         <option th:value="${T(com.cvdatabase.project.entities.Gender).M}" th:text="Мужской"></option>
                         <option th:value="${T(com.cvdatabase.project.entities.Gender).F}" th:text="Женский"></option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                    Сохранить
-                </button>
+                <div class="form-inline justify-content-center">
+                    <div>
+                        <button type="submit" class="btn btn-primary">
+                            Сохранить
+                        </button>
+                    </div>
+                    <div class="ml-2">
+                        <form th:action="@{'/persons/delete/' + ${person.id}}" th:method="delete">
+                            <button class="btn btn-danger">
+                                Удалить
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </form>
         </div>
     </form>

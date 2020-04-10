@@ -8,13 +8,16 @@ import com.cvdatabase.project.api.services.ICVService;
 import com.cvdatabase.project.dto.CVDto;
 import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.dto.PersonDto;
-import com.cvdatabase.project.entities.*;
+import com.cvdatabase.project.dto.TechnologyDto;
+import com.cvdatabase.project.entities.CV;
+import com.cvdatabase.project.entities.ContactData;
+import com.cvdatabase.project.entities.Person;
+import com.cvdatabase.project.entities.Technology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -39,7 +42,8 @@ public class CVService implements ICVService {
 
     public CVDto addCV(CVDto cvDto,
                        PersonDto personDto,
-                       ContactDataDto contactDataDto) {
+                       ContactDataDto contactDataDto,
+                       int[] technologies) {
 
         ContactData contactData = new ContactData();
         contactData.setMobilePhone(contactDataDto.getMobilePhone());
@@ -56,8 +60,19 @@ public class CVService implements ICVService {
         person.setGender(personDto.getGender());
         person.setBirthDate(personDto.getBirthDate());
         person.setContactData(contactData);
+        
+        if (technologies != null) {
+            Technology technology = null;
+            for (long i = 0; i < technologies.length; i++) {
+                if (technologyDao.get(i) != null) {
+                    technology = new Technology();
+                    technology.setId(i);
+                    person.getTechnologies().add(technology);
+                    technology.getPersons().add(person);
+                }
+            }
+        }
         personDao.create(person);
-
 
         CV cv = new CV();
         cv.setPerson(person);

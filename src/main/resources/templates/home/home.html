@@ -7,20 +7,29 @@
     <link rel="stylesheet" href="css/cover.css"/>
     <title>Резюме менеджер</title>
 </head>
+<style>
+    body::before {
+    content: '';
+    position: fixed; /* Фиксируем на одном месте */
+    left: 0; right: 0; /* Вся ширин */
+    top: 0; bottom: 0; /* Вся высота */
+    z-index: -1; /* Фон ниже текста */
+    /* Параметры фона */
+    background: url(/img/background.jpg) center / cover no-repeat;
+   }
+</style>
 <body>
-<div style="background: url(../img/background.jpg)" class="page-holder bg-cover">
-    <div th:replace="~{fragments/header :: header}">Header</div>
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-3">Добро пожаловать!</h1>
-            </br>
-            <div class="lead">
-                База данных резюме
-            </div>
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-3">Добро пожаловать!</h1>
+        </br>
+        <div class="lead">
+            База данных резюме.
         </div>
     </div>
-    <div class="fixed-bottom mb-2" th:insert="~{fragments/footer :: footer}">&copy; 2017 The Static Templates</div>
 </div>
+<div class="fixed-bottom mb-5" th:insert="~{fragments/footer :: footer}">&copy; 2017 The Static Templates</div>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -33,6 +42,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
 </body>
 </html>

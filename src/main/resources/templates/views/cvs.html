@@ -8,6 +8,18 @@
     <link href="../../../resources/static/css/core.css" rel="stylesheet" media="screen"
           th:href="@{/resources/static/css/core.css}"/>
 </head>
+<style>
+    body::before {
+    content: '';
+    position: fixed; /* Фиксируем на одном месте */
+    left: 0; right: 0; /* Вся ширин */
+    top: 0; bottom: 0; /* Вся высота */
+    z-index: -1; /* Фон ниже текста */
+    /* Параметры фона */
+    background: url(/img/background.jpg) center / cover no-repeat;
+    filter: blur(5px); /* Размытие */
+   }
+</style>
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
 <br/>
@@ -56,7 +68,7 @@
         </thead>
         <tbody>
         <tr th:each="cv : ${cvs}" >
-            <td class="align-middle col-xs-1 text-center"  th:text="${cv.id}"></td>
+            <td class="align-middle col-xs-1 text-center" th:text="${cv.id}"></td>
             <td class="align-middle col-xs-1 text-center" th:text="${cv.lastName}"></td>
             <td class="align-middle col-xs-1 text-center" th:text="${cv.firstName}"></td>
             <td class="align-middle col-xs-1 text-center" th:text="${cv.middleName}"></td>

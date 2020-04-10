@@ -18,7 +18,6 @@ public class PersonController {
     IPersonService personService;
 
     //Create
-
     @GetMapping(value = "/new")
     public ModelAndView showNewPersonForm() {
         PersonDto personDto = new PersonDto();
@@ -27,8 +26,6 @@ public class PersonController {
         modelAndView.addObject("person", personDto);
         return modelAndView;
     }
-
-
 
     @PostMapping(value = "/save",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -85,11 +82,22 @@ public class PersonController {
     }
 
     //Update
-    @PutMapping(value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updatePerson(@PathVariable long id, @RequestBody PersonDto personDto) {
+    @GetMapping(value = "/edit_person/{id}")
+    public ModelAndView showEditCVFrom(@PathVariable long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("views/edit_person");
+        PersonDto personDto = personService.getPersonById(id);
+        modelAndView.addObject("person", personDto);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ModelAndView editPerson(@PathVariable("id") long id,
+                                   PersonDto personDto) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/persons");
         personService.updatePerson(id, personDto);
+        return modelAndView;
     }
 
     @PutMapping(value = "/add_technology/technologyIdt}/{personId}",
@@ -107,9 +115,12 @@ public class PersonController {
     }
 
     //Delete
-    @DeleteMapping(value = "/{id}")
-    public void deletePerson(@PathVariable long id) {
+    @PostMapping(value = "/delete/{id}")
+    public ModelAndView deletePerson(@PathVariable("id") long id) {
+        ModelAndView modelAndView = new ModelAndView();
         personService.deletePerson(id);
+        modelAndView.setViewName("redirect:/persons");
+        return modelAndView;
     }
 }
 

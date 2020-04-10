@@ -1,35 +1,26 @@
 package com.cvdatabase.project.controllers;
 
 import com.cvdatabase.project.api.services.ICVService;
-import com.cvdatabase.project.api.services.IContactDataService;
-import com.cvdatabase.project.api.services.IPersonService;
 import com.cvdatabase.project.api.services.ITechnologyService;
 import com.cvdatabase.project.dto.CVDto;
 import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.dto.PersonDto;
 import com.cvdatabase.project.dto.TechnologyDto;
-import com.cvdatabase.project.entities.CV;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
+//CRUD
 @RestController
 @RequestMapping("/cvs")
 public class CVController {
 
     @Autowired(required = true)
     ICVService cvService;
-
-    @Autowired
-    IPersonService personService;
-
-    @Autowired
-    IContactDataService contactDataService;
 
     @Autowired
     ITechnologyService technologyService;
@@ -39,7 +30,7 @@ public class CVController {
         CVDto cvDto = new CVDto();
         PersonDto personDto = new PersonDto();
         ContactDataDto contactDataDto = new ContactDataDto();
-        List<TechnologyDto> technologyDtos = new ArrayList<>();
+        List<TechnologyDto> technologyDtos = technologyService.getAllTechnologies();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("cv", cvDto);
         modelAndView.addObject("person", personDto);
@@ -54,9 +45,11 @@ public class CVController {
     public ModelAndView addCV(
             CVDto cvDto,
             PersonDto personDto,
-            ContactDataDto contactDataDto) {
+            ContactDataDto contactDataDto,
+            @RequestParam(value = "technologies") int[] technologies,
+            BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        cvService.addCV(cvDto, personDto, contactDataDto);
+        cvService.addCV(cvDto, personDto, contactDataDto, technologies);
         modelAndView.setViewName("redirect:/cvs");
         return modelAndView;
     }
@@ -82,12 +75,11 @@ public class CVController {
         return modelAndView;
     }
 
-
     @PostMapping(value = "/delete/{id}")
     public ModelAndView deleteCV(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/cvs");
         cvService.deleteCV(id);
+        modelAndView.setViewName("redirect:/cvs");
         return modelAndView;
     }
 

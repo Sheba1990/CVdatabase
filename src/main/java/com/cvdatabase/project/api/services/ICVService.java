@@ -3,6 +3,7 @@ package com.cvdatabase.project.api.services;
 import com.cvdatabase.project.dto.CVDto;
 import com.cvdatabase.project.dto.ContactDataDto;
 import com.cvdatabase.project.dto.PersonDto;
+import com.cvdatabase.project.dto.TechnologyDto;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface ICVService {
 
     public List<CVDto> getAllCVs();
 
-    CVDto addCV(CVDto cvDto, PersonDto personDto, ContactDataDto contactDataDto);
+    CVDto addCV(CVDto cvDto, PersonDto personDto, ContactDataDto contactDataDto, int[] technologies);
 
     CVDto getCVbyId(long id);
 

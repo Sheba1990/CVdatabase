@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../../../resources/static/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/static/css/core.css}"/>
 </head>
+<style>
+    body::before {
+    content: '';
+    position: fixed; /* Фиксируем на одном месте */
+    left: 0; right: 0; /* Вся ширин */
+    top: 0; bottom: 0; /* Вся высота */
+    z-index: -1; /* Фон ниже текста */
+    /* Параметры фона */
+    background: url(/img/background.jpg) center / cover no-repeat;
+    filter: blur(5px); /* Размытие */
+   }
+</style>
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div align="center">
@@ -30,20 +42,24 @@
                     <div class="col-md-2 mb-3 mx-auto">
                         <label>Пол</label>
                         <select class="form-control" id="gender" th:field="*{person.gender}">
-                            <option th:value="${T(com.cvdatabase.project.entities.Gender).M}" th:text="Мужской"></option>
-                            <option th:value="${T(com.cvdatabase.project.entities.Gender).F}" th:text="Женский"></option>
+                            <option th:value="${T(com.cvdatabase.project.entities.Gender).M}"
+                                    th:text="Мужской"></option>
+                            <option th:value="${T(com.cvdatabase.project.entities.Gender).F}"
+                                    th:text="Женский"></option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
                         <label>Дата рождения</label>
-                        <input type="text" th:field="*{person.birthDate}" class="form-control" placeholder="в формате 'дд.мм.гггг'">
+                        <input type="text" th:field="*{person.birthDate}" class="form-control"
+                               placeholder="в формате 'дд.мм.гггг'">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
                     <div class="col-sm-5">
-                        <input type="text" th:field="*{contacts.mobilePhone}" class="form-control" placeholder="Мобильный телефон">
+                        <input type="text" th:field="*{contacts.mobilePhone}" class="form-control"
+                               placeholder="Мобильный телефон">
                     </div>
                 </div>
                 <div class="form-group mx-auto">
@@ -66,14 +82,17 @@
                         <input type="text" th:field="*{contacts.linkedIn}" class="form-control" placeholder="Linkedin">
                     </div>
                 </div>
-                <ul>
-                    <!--div>
-                        <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
-                    </div-->
-                    <li th:each="technology : ${technologies}">
-                        <label><input type="checkbox" th:name="${technology.name}" ${cv.technologies$seq_contains(technology)?string("checked", "")}>${technology}</label>
-                    </li>
-                </ul>
+                <div>
+                    <tr>
+                        <td>Технологии: </td>
+                        <td>
+                            <th:block th:each="technology: ${technologies}">
+                                <input type="checkbox" name="technologies" th:value="${technology.id}">
+                                <label th:text="${technology.name}"></label>
+                            </th:block>
+                        </td>
+                    </tr>
+                </div>
             </form>
             <div class="form-inline justify-content-center">
                 <div>
