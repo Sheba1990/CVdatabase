@@ -85,7 +85,7 @@
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring5</artifactId>
 			<!-- TODO Remove once available in platform BOM -->
-			<version>3.0.11.RELEASE</version>
+			<version>3.0.13.RELEASE</version>
 			<!-- Avoid org.hibernate.jpa.boot.archive.spi.ArchiveException: Could not build ClassFile in Java 8 -->
 			<exclusions>
 				<exclusion>
